@@ -1,0 +1,94 @@
+<!--
+  @license
+  Copyright (c) 2015 Xinix Technology
+
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the "Software"),
+  to deal in the Software without restriction, including without limitation
+  the rights to use, copy, modify, merge, publish, distribute, sublicense,
+  and/or sell copies of the Software, and to permit persons to whom the
+  Software is furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+  DEALINGS IN THE SOFTWARE.
+-->
+
+<template is="xin-template" for="ionic-input">
+  <label id="label" class="item item-input">
+    <span id="inputLabel" class="input-label">[[label]]</span>
+    <input id="input" type="[[type]]" placeholder="[[label]]" on-input="showLabel" name="[[name]]" value="{{value}}">
+  </label>
+</template>
+
+<script type="text/javascript">
+(function(root) {
+  'use strict';
+
+  var xin = root.xin;
+
+  xin.Component({
+    is: 'ionic-input',
+
+    properties: {
+      label: String,
+
+      mode: String,
+
+      name: String,
+
+      type: {
+        type: String,
+        value: 'text',
+      },
+
+      value: {
+        type: String,
+        notify: true,
+      },
+
+      autofocus: Boolean,
+    },
+
+    ready: function() {
+      if (this.autofocus) {
+        this.$.input.setAttribute('autofocus', true);
+      }
+
+      this.mode = this.mode || 'placeholder';
+      switch(this.mode) {
+        case 'floating':
+          this.$.label.classList.add('item-floating-label');
+          break;
+        case 'stacked':
+          this.$.label.classList.add('item-stacked-label');
+          break;
+        case 'placeholder':
+          this.$.inputLabel.style.display = 'none';
+          break;
+      }
+
+      this.showLabel();
+    },
+
+    showLabel: function(evt) {
+      if (this.mode === 'floating') {
+        var label = this.$.inputLabel;
+        var target = this.$.input;
+        if (target.value) {
+          label.classList.add('has-input');
+        } else {
+          label.classList.remove('has-input');
+        }
+      }
+    },
+  });
+})(this);
+</script>
