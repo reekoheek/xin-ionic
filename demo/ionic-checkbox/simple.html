@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ionic-checkbox</title>
+</head>
+<body>
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="/bower_components/xin-ionic/ionic-demo.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-header.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-content.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-list.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-item.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-checkbox.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-radio.html">
+
+  <ionic-demo id="demo">
+    <template>
+      <ionic-header title="Checkbox and Radio"></ionic-header>
+      <ionic-content>
+        <ionic-list>
+          <ionic-checkbox value="{{red}}">Red</ionic-checkbox>
+          <ionic-checkbox value="{{green}}">Green</ionic-checkbox>
+          <ionic-checkbox value="{{blue}}">Blue</ionic-checkbox>
+
+          <ionic-item>Red: <span>[[red]]</span></ionic-item>
+          <ionic-item>Green: <span>[[green]]</span></ionic-item>
+          <ionic-item>Blue: <span>[[blue]]</span></ionic-item>
+          <ionic-item kind="divider"></ionic-item>
+
+          <ionic-radio-group value="{{color}}">
+            <ionic-radio value="red">Red</ionic-radio>
+            <ionic-radio value="green">Green</ionic-radio>
+            <ionic-radio value="blue">Blue</ionic-radio>
+          </ionic-radio-group>
+
+          <ionic-item>Color: <span>[[color]]</span></ionic-item>
+        </ionic-list>
+
+      </ionic-content>
+    </template>
+  </ionic-demo>
+
+</body>
+</html>
+

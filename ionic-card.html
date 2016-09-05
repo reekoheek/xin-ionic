@@ -1,0 +1,26 @@
+<link rel="import" href="./xin-ionic.html">
+
+<!--
+  @component ionic-card
+
+  @demo /demo/ionic-card/simple.html
+-->
+
+<style>
+ionic-card {
+  display: block;
+}
+</style>
+<script>
+(function() {
+  'use strict';
+
+  xin.Component({
+    is: 'ionic-card',
+
+    ready: function() {
+      this.classList.add('card');
+    },
+  });
+})();
+</script>

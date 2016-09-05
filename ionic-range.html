@@ -1,0 +1,66 @@
+<link rel="import" href="./xin-ionic.html">
+
+<!--
+  @component ionic-range
+
+  @demo /demo/ionic-range/simple.html
+-->
+
+<template is="xin-template" for="ionic-range">
+  <i class="icon" id="iconFrom"></i>
+  <input type="range" id="nativeInput" min="[[min]]" max="[[max]]" step="[[step]]" value="{{value}}">
+  <i class="icon" id="iconTo"></i>
+</template>
+<script>
+(function() {
+  'use strict';
+
+  xin.Component({
+    is: 'ionic-range',
+
+    properties: {
+      value: {
+        type: Number,
+        notify: true,
+      },
+
+      iconFrom: {
+        type: String,
+        observer: '_iconFromChanged',
+      },
+
+      iconTo: {
+        type: String,
+        observer: '_iconToChanged',
+      },
+
+      min: {
+        type: Number,
+        value: 0,
+      },
+
+      max: {
+        type: Number,
+        value: 100,
+      },
+
+      step: {
+        type: Number,
+        value: 1,
+      },
+    },
+
+    ready: function() {
+      this.classList.add('item', 'range');
+    },
+
+    _iconFromChanged: function() {
+      this.$.iconFrom.classList.add('ion-' + this.iconFrom);
+    },
+
+    _iconToChanged: function() {
+      this.$.iconTo.classList.add('ion-' + this.iconTo);
+    }
+  });
+})();
+</script>

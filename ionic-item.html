@@ -1,0 +1,32 @@
+<link rel="import" href="./xin-ionic.html">
+
+<!--
+@component ionic-item
+
+@demo /demo/ionic-list/simple.html
+-->
+
+<script>
+(function() {
+  'use strict';
+
+  xin.Component({
+    is: 'ionic-item',
+
+    properties: {
+      kind: {
+        type: String,
+        value: 'item',
+      },
+    },
+
+    ready: function() {
+      if (this.kind === 'divider') {
+        this.classList.add('item', 'item-divider');
+      } else {
+        this.classList.add('item');
+      }
+    }
+  });
+})();
+</script>

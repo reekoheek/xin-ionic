@@ -1,0 +1,34 @@
+<link rel="import" href="./xin-ionic.html">
+<link rel="import" href="./bar-behavior.html">
+
+<!--
+@component ionic-header
+
+@demo /demo/ionic-header/simple.html
+-->
+
+<template is="xin-template" for="ionic-header">
+  <div class="buttons">
+    <content select="[side=left]"></content>
+  </div>
+  <div class="title">[[title]]</div>
+  <div class="buttons">
+    <content select="[side=right]"></content>
+  </div>
+</template>
+
+<script>
+(function() {
+  'use strict';
+
+  xin.Component({
+    is: 'ionic-header',
+
+    behaviors: ['ionic.BarBehavior'],
+
+    created: function() {
+      this.classList.add('bar-header');
+    },
+  });
+})();
+</script>

@@ -21,59 +21,14 @@
   DEALINGS IN THE SOFTWARE.
 -->
 
-<link rel="import" href="./xin-ionic.html">
 
-<!--
-  @component ionic-toggle
+<style>
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+</style>
 
-  @demo /demo/ionic-toggle/simple.html
--->
-<template is="xin-template" for="ionic-toggle">
-  <div class="item item-toggle">
-    <span>[[label]]</span>
-    <label class="toggle">
-      <input id="checkbox" type="checkbox" name="[[name]]" on-change="checkChanged">
-      <div class="track">
-        <div class="handle"></div>
-      </div>
-    </label>
-  </div>
-</template>
-
-<script type="text/javascript">
-(function(root) {
-  'use strict';
-
-  var xin = root.xin;
-
-  xin.Component({
-    is: 'ionic-toggle',
-
-    properties: {
-      label: String,
-
-      name: String,
-
-      value: {
-        type: Boolean,
-        value: false,
-        notify: true,
-        observer: 'valueChanged'
-      },
-
-      checked: Boolean,
-    },
-
-    checkChanged: function(evt) {
-      var checked = evt.currentTarget.checked;
-      this.set('value', checked);
-      this.set('checked', checked);
-      this.fire('change');
-    },
-
-    valueChanged: function(value, oldValue) {
-      this.$.checkbox.checked = value;
-    }
-  });
-})(this);
-</script>
+<link rel="stylesheet" href="./css/ionic.css">
+<link rel="import" href="../xin/xin.html">

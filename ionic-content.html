@@ -1,0 +1,19 @@
+<link rel="import" href="./xin-ionic.html">
+<!--
+  @component ionic-content
+
+  @demo /demo/ionic-content/simple.html
+-->
+<script>
+(function() {
+  'use strict';
+
+  xin.Component({
+    is: 'ionic-content',
+
+    created: function() {
+      this.classList.add('has-header', 'padding', 'scroll-content', 'overflow-scroll');
+    },
+  });
+})();
+</script>

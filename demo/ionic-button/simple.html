@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ionic-button</title>
+</head>
+<body>
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="/bower_components/xin-ionic/ionic-demo.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-header.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-content.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-footer.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-list.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-item.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-select.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-button.html">
+
+  <ionic-demo>
+    <template>
+      <ionic-header title="Button"></ionic-header>
+      <ionic-content>
+        <ionic-list>
+          <ionic-select label="Colored" value="{{color}}">
+            <option value="light">Light</option>
+            <option value="stable">Stable</option>
+            <option value="positive">Positive</option>
+            <option value="calm">Calm</option>
+            <option value="balanced">Balanced</option>
+            <option value="energized">Energized</option>
+            <option value="assertive">Assertive</option>
+            <option value="royal">Royal</option>
+            <option value="dark">Dark</option>
+          </ionic-select>
+          <ionic-item>
+            <ionic-button color="[[color]]">Colored</ionic-button>
+          </ionic-item>
+          <ionic-item kind="divider"></ionic-item>
+
+          <ionic-item>Block</ionic-item>
+          <ionic-item>
+            <ionic-button block="true" color="calm">Block</ionic-button>
+          </ionic-item>
+          <ionic-item kind="divider"></ionic-item>
+
+          <ionic-item>Full</ionic-item>
+          <ionic-item>
+            <ionic-button full="true" color="royal">Full</ionic-button>
+          </ionic-item>
+          <ionic-item kind="divider"></ionic-item>
+
+          <ionic-item>Clear</ionic-item>
+          <ionic-item>
+            <ionic-button clear="true" color="assertive">Clear</ionic-button>
+          </ionic-item>
+          <ionic-item kind="divider"></ionic-item>
+
+          <ionic-item>Outline</ionic-item>
+          <ionic-item>
+            <ionic-button outline="true" color="assertive">Outline</ionic-button>
+          </ionic-item>
+          <ionic-item kind="divider"></ionic-item>
+
+          <ionic-item>Icon</ionic-item>
+          <ionic-item>
+            <ionic-button block="true" icon="home" icon-side="left">Home</ionic-button>
+            <ionic-button block="true" icon="navicon" icon-side="right">Menu</ionic-button>
+            <ionic-button icon="star"></ionic-button>
+          </ionic-item>
+          <ionic-item kind="divider"></ionic-item>
+
+          <ionic-item>Size</ionic-item>
+          <ionic-item>
+            <ionic-button size="small">Small</ionic-button>
+            <br>
+            <br>
+            <ionic-button size="">Default</ionic-button>
+            <br>
+            <br>
+            <ionic-button size="large">Large</ionic-button>
+          </ionic-item>
+        </ionic-list>
+      </ionic-content>
+    </template>
+  </ionic-demo>
+</body>
+</html>

@@ -21,6 +21,8 @@
   DEALINGS IN THE SOFTWARE.
 -->
 
+<link rel="import" href="./xin-ionic.html">
+
 <template is="xin-template" for="ionic-input">
   <label id="label" class="item item-input">
     <span id="inputLabel" class="input-label">[[label]]</span>
@@ -28,17 +30,23 @@
   </label>
 </template>
 
-<script type="text/javascript">
-(function(root) {
-  'use strict';
+<!--
+  @component ionic-input
 
-  var xin = root.xin;
+  @demo /demo/ionic-input/simple.html
+-->
+<script>
+(function() {
+  'use strict';
 
   xin.Component({
     is: 'ionic-input',
 
     properties: {
-      label: String,
+      label: {
+        type: String,
+        value: 'Input',
+      },
 
       mode: String,
 
@@ -90,5 +98,5 @@
       }
     },
   });
-})(this);
+})();
 </script>

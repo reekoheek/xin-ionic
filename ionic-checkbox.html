@@ -1,0 +1,39 @@
+<link rel="import" href="./xin-ionic.html">
+
+<!--
+@component ionic-checkbox
+
+@demo /demo/ionic-checkbox/simple.html
+-->
+
+<template is="xin-template" for="ionic-checkbox">
+  <label class="checkbox">
+    <input id="nativeInput" type="checkbox" on-change="_valueChanged">
+  </label>
+  <content/>
+</template>
+<script>
+(function() {
+  'use strict';
+
+  xin.Component({
+    is: 'ionic-checkbox',
+
+    properties: {
+      value: {
+        type: Boolean,
+        notify: true,
+      },
+    },
+
+    ready: function() {
+      this.$.nativeInput.checked = this.value;
+      this.classList.add('item', 'item-checkbox');
+    },
+
+    _valueChanged: function(evt) {
+      this.set('value', evt.target.checked);
+    },
+  });
+})();
+</script>

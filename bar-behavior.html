@@ -1,0 +1,40 @@
+<script>
+(function() {
+  'use strict';
+
+  var BarBehavior = {
+    properties: {
+      title: {
+        type: String,
+      },
+      color: {
+        type: String,
+        value: 'light',
+        observer: 'colorChanged',
+      },
+    },
+
+    created: function() {
+      this.classList.add('bar');
+      this.colorChanged(this.color);
+    },
+
+    colorChanged: function(color) {
+      var removed = [];
+      for(var i = 0; i < this.classList.length; i++) {
+        var item = this.classList.item(i);
+        if (item === 'bar-header' || item === 'bar-footer') {
+          continue;
+        }
+        if (item.startsWith('bar-')) {
+          removed.push(item);
+        }
+      }
+      this.classList.remove.apply(this.classList, removed);
+      this.classList.add('bar-' + color);
+    },
+  };
+
+  xin.Behavior('ionic.BarBehavior', BarBehavior);
+})();
+</script>

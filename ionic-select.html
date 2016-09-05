@@ -1,0 +1,53 @@
+<link rel="import" href="./xin-ionic.html">
+
+<!--
+  @component ionic-select
+
+  @demo /demo/ionic-select/simple.html
+-->
+
+<template is="xin-template" for="ionic-select">
+  <div class="input-label">[[label]]</div>
+  <select id="nativeSelect" value="{{value}}"></select>
+</template>
+
+<script>
+(function() {
+  'use strict';
+
+  xin.Component({
+    is: 'ionic-select',
+
+    properties: {
+      label: {
+        type: String,
+        value: 'Select',
+      },
+      value: {
+        type: String,
+        notify: true,
+      },
+    },
+
+    created: function() {
+      this.classList.add('item', 'item-input', 'item-select');
+    },
+
+    ready: function() {
+      // TODO this is fixed because xin cannot insert content to select
+      this._lightDoms.forEach(function(node) {
+        this.$.nativeSelect.appendChild(node);
+      }.bind(this));
+    },
+
+    getSelectedLabel: function() {
+      var select$ = this.$.nativeSelect;
+      return select$.options[select$.selectedIndex].textContent;
+    },
+
+    getSelectedIndex: function() {
+      return this.$.nativeSelect.selectedIndex;
+    },
+  });
+})();
+</script>

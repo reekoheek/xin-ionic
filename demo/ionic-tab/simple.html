@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ionic-tab</title>
+</head>
+<body>
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="/bower_components/xin-ionic/ionic-demo.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-header.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-list.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-item.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-select.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-button.html">
+  <link rel="import" href="/bower_components/xin-ionic/ionic-tab.html">
+
+  <ionic-demo id="demo">
+    <template>
+      <ionic-header title="Tabs">
+        <buttons side="right">
+          <ionic-button icon="ios-more" color="calm" clear="true" on-tap="_stripedToggled"></ionic-button>
+          <ionic-button icon="ios-arrow-up" color="assertive" clear="true" on-tap="_positionToggled"></ionic-button>
+        </buttons>
+      </ionic-header>
+
+      <ionic-tabs id="tabs" position="bottom" striped="true" color="[[tabsColor]]" background="[[tabsBackground]]" kind="[[tabsKind]]">
+        <ionic-tab title="Settings" icon-on="ios-gear" icon-off="ios-gear-outline">
+          <h1>Settings</h1>
+
+          <ionic-list>
+            <ionic-select label="Color" value="{{tabsColor}}">
+              <option value="light">Light</option>
+              <option value="stable">Stable</option>
+              <option value="positive">Positive</option>
+              <option value="calm">Calm</option>
+              <option value="balanced">Balanced</option>
+              <option value="energized">Energized</option>
+              <option value="assertive">Assertive</option>
+              <option value="royal">Royal</option>
+              <option value="dark">Dark</option>
+            </ionic-select>
+
+            <ionic-select label="Background" value="{{tabsBackground}}">
+              <option value="light">Light</option>
+              <option value="stable">Stable</option>
+              <option value="positive">Positive</option>
+              <option value="calm">Calm</option>
+              <option value="balanced">Balanced</option>
+              <option value="energized">Energized</option>
+              <option value="assertive">Assertive</option>
+              <option value="royal">Royal</option>
+              <option value="dark">Dark</option>
+            </ionic-select>
+
+            <ionic-select label="Kind" value="{{tabsKind}}">
+              <option value="">Text Only</option>
+              <option value="icon-only">Icon Only</option>
+              <option value="icon-top">Icon Top</option>
+              <option value="icon-left">Icon Left</option>
+            </ionic-select>
+          </ionic-list>
+        </ionic-tab>
+
+        <ionic-tab title="Home" icon-on="ios-filing" icon-off="ios-filing-outline">
+          <h1>Home</h1>
+        </ionic-tab>
+
+        <ionic-tab title="About" icon-on="ios-clock" icon-off="ios-clock-outline">
+          <h1>About</h1>
+        </ionic-tab>
+      </ionic-tabs>
+    </template>
+  </ionic-demo>
+
+  <script>
+  (function() {
+    'use strict';
+
+    demo._positionToggled = function(evt) {
+      var target = evt.target;
+      if (target.tagName !== 'ionic-button') {
+        target = xin.Dom(evt.target).parent('ionic-button');
+      }
+      if (tabs.position === 'top') {
+        target.set('icon', 'ios-arrow-up');
+        tabs.set('position', 'bottom');
+      } else {
+        target.set('icon', 'ios-arrow-down');
+        tabs.set('position', 'top');
+      }
+    };
+
+    demo._stripedToggled = function(evt) {
+      var target = evt.target;
+      if (target.tagName !== 'ionic-button') {
+        target = xin.Dom(evt.target).parent('ionic-button');
+      }
+      if (tabs.striped) {
+        target.set('icon', 'ios-more-outline');
+        tabs.set('striped', false);
+      } else {
+        target.set('icon', 'ios-more');
+        tabs.set('striped', true);
+      }
+    };
+  })();
+  </script>
+</body>
+</html>
