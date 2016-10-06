@@ -1,0 +1,130 @@
+<script src="../../node_modules/web-component-tester/browser.js"></script>
+<script>
+  // var xinOptions = {
+  //   debug: true,
+  // };
+</script>
+<script src="../../dist/xin.js"></script>
+<script src="../../dist/ion-button.js"></script>
+
+<ion-app id="iosApp"></ion-app>
+<ion-app id="androidApp"></ion-app>
+<ion-app id="unknownApp"></ion-app>
+
+<template id="tplDefaultButton">
+  <button is="ion-button"></button>
+</template>
+
+<template id="tplOutlineButton">
+  <button is="ion-button" outline></button>
+</template>
+
+<template id="tplColorSecondaryButton">
+  <button is="ion-button" color="secondary"></button>
+</template>
+
+<template id="tplColorButton">
+  <button is="ion-button" color="secondary"></button>
+  <button is="ion-button" color="danger"></button>
+  <button is="ion-button" color="light"></button>
+  <button is="ion-button" color="dark"></button>
+</template>
+
+<template id="tplShapeButton">
+  <button is="ion-button" full></button>
+  <button is="ion-button" block></button>
+  <button is="ion-button" round></button>
+  <button is="ion-button" fab></button>
+</template>
+
+<template id="tplSizeButton">
+  <button is="ion-button" large></button>
+  <button is="ion-button" small></button>
+</template>
+
+<script>
+describe('io-button', () => {
+  before(() => {
+    iosApp.__appSignature = androidApp.__appSignature = true;
+
+    iosApp.platform = 'ios';
+    androidApp.platform = 'android';
+  });
+
+  beforeEach(() => {
+    iosApp.innerHTML = androidApp.innerHTML = unknownApp.innerHTML = '';
+  })
+
+  it('show default ios button', () => {
+    iosApp.appendChild(document.importNode(tplDefaultButton.content, true));
+
+    let btn = iosApp.querySelector('[is=ion-button]');
+    assert('__id' in btn);
+    assert.equal(btn.textContent.trim(), 'Button');
+    assert(btn.classList.contains('button'));
+    assert(btn.classList.contains('button-ios'));
+    assert(btn.classList.contains('button-default-ios'));
+  });
+
+  it('show default android button', () => {
+    androidApp.appendChild(document.importNode(tplDefaultButton.content, true));
+
+    let btn = androidApp.querySelector('[is=ion-button]');
+    assert('__id' in btn);
+    assert.equal(btn.textContent.trim(), 'Button');
+    assert(btn.classList.contains('button'));
+    assert(btn.classList.contains('button-md'));
+    assert(btn.classList.contains('button-default-md'));
+  });
+
+  it('show default unknown button', () => {
+    unknownApp.appendChild(document.importNode(tplDefaultButton.content, true));
+
+    let btn = unknownApp.querySelector('[is=ion-button]');
+    assert('__id' in btn);
+    assert.equal(btn.textContent.trim(), 'Button');
+    assert(btn.classList.contains('button'));
+    assert(btn.classList.contains('button-ios'));
+    assert(btn.classList.contains('button-default-ios'));
+  });
+
+  it('show outline button', () => {
+    iosApp.appendChild(document.importNode(tplOutlineButton.content, true));
+
+    let btn = iosApp.querySelector('[is=ion-button]');
+    assert(btn.classList.contains('button-outline'));
+    assert(btn.classList.contains('button-outline-ios'));
+  });
+
+  it('show color button', () => {
+    iosApp.appendChild(document.importNode(tplColorButton.content, true));
+
+    assert(iosApp.querySelector('[color=secondary]').classList.contains('button-ios-secondary'));
+    assert(iosApp.querySelector('[color=danger]').classList.contains('button-ios-danger'));
+    assert(iosApp.querySelector('[color=light]').classList.contains('button-ios-light'));
+    assert(iosApp.querySelector('[color=dark]').classList.contains('button-ios-dark'));
+  });
+
+  it('show shape button', () => {
+    iosApp.appendChild(document.importNode(tplShapeButton.content, true));
+
+    assert(iosApp.querySelector('[full]').classList.contains('button-full'));
+    assert(iosApp.querySelector('[full]').classList.contains('button-full-ios'));
+    assert(iosApp.querySelector('[block]').classList.contains('button-block'));
+    assert(iosApp.querySelector('[block]').classList.contains('button-block-ios'));
+    assert(iosApp.querySelector('[round]').classList.contains('button-round'));
+    assert(iosApp.querySelector('[round]').classList.contains('button-round-ios'));
+    assert(iosApp.querySelector('[fab]').classList.contains('button-fab'));
+    assert(iosApp.querySelector('[fab]').classList.contains('button-fab-ios'));
+  });
+
+  it('show size button', () => {
+    iosApp.appendChild(document.importNode(tplSizeButton.content, true));
+
+    assert(iosApp.querySelector('[small]').classList.contains('button-small'));
+    assert(iosApp.querySelector('[small]').classList.contains('button-small-ios'));
+    assert(iosApp.querySelector('[large]').classList.contains('button-large'));
+    assert(iosApp.querySelector('[large]').classList.contains('button-large-ios'));
+  });
+});
+</script>
