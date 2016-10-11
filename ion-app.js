@@ -7,22 +7,22 @@ class IonApp extends App {
 
     props.platform = {
       type: String,
-      value: 'ios',
+      value: 'android',
     };
 
-    props.design = {
+    props.platformMode = {
       type: String,
-      computed: '_computeDesign(platform)',
+      computed: '_computePlatformMode(platform)',
     };
 
     return props;
   }
 
   ready () {
-    this.classList.add(this.design);
+    this.classList.add(this.platformMode);
   }
 
-  _computeDesign (platform) {
+  _computePlatformMode (platform) {
     return platform === 'android' ? 'md' : platform;
   }
 }

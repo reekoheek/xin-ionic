@@ -1,0 +1,9 @@
+.xin-view.xin-view--visible {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-inner > slot > ion-content,
+.xin-view > ion-content {
+  flex: 1;
+}

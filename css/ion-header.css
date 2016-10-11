@@ -1,0 +1,4 @@
+.menu-inner > slot > ion-header,
+.xin-view > ion-header {
+  position: relative;
+}

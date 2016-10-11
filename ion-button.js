@@ -49,50 +49,73 @@ class IonButton extends xin.Component {
         type: Boolean,
         value: false,
       },
+
+      menutoggle: {
+        type: Boolean,
+        value: false,
+      },
     };
   }
 
+  ready () {
+    if (this.menutoggle) {
+      this.addEventListener('click', evt => {
+        evt.preventDefault();
+
+        this.__app.menu.open();
+      });
+    }
+  }
+
   attached () {
-    let platform = this.__app && this.__app.platform;
-    let design = platform === 'android' ? 'md' : 'ios';
+    let prefix = xin.dom(this).parent('.toolbar') ? 'bar-' : '';
+
+    let mode = (this.__app && this.__app.platformMode) || 'md';
 
     let classList = ['button'];
 
     // outline
-    classList.push(this.outline ? 'button-outline' : 'button-default');
+    classList.push(this.outline ? `${prefix}button-outline` : `${prefix}button-default`);
 
     // platform
-    classList.push(`button-${design}`);
-    classList.push(`button-${this.outline ? 'outline' : 'default'}-${design}`);
+    classList.push(`${prefix}button-${mode}`);
+    classList.push(`${prefix}button-${this.outline ? 'outline' : 'default'}-${mode}`);
 
     // color
     if (this.color) {
-      classList.push(`button-${design}-${this.color}`);
+      classList.push(`${prefix}button-${mode}-${this.color}`);
     }
 
     // shape
     if (this.full) {
-      classList.push(`button-full`, `button-full-${design}`);
+      classList.push(`${prefix}button-full`, `${prefix}button-full-${mode}`);
     }
     if (this.block) {
-      classList.push(`button-block`, `button-block-${design}`);
+      classList.push(`${prefix}button-block`, `${prefix}button-block-${mode}`);
     }
     if (this.round) {
-      classList.push(`button-round`, `button-round-${design}`);
+      classList.push(`${prefix}button-round`, `${prefix}button-round-${mode}`);
     }
     if (this.fab) {
-      classList.push(`button-fab`, `button-fab-${design}`);
+      classList.push(`${prefix}button-fab`, `${prefix}button-fab-${mode}`);
     }
 
     // size
     if (this.small) {
-      classList.push(`button-small`, `button-small-${design}`);
+      classList.push(`${prefix}button-small`, `${prefix}button-small-${mode}`);
     }
     if (this.large) {
-      classList.push(`button-large`, `button-large-${design}`);
+      classList.push(`${prefix}button-large`, `${prefix}button-large-${mode}`);
     }
 
-    this.classList.add.apply(this.classList, classList);
+    // menutoggle
+    if (this.menutoggle) {
+      classList.push(`${prefix}button-menutoggle`, `${prefix}button-menutoggle-${mode}`);
+    }
+
+    classList.forEach(className => {
+      this.classList.add(className);
+    });
   }
 }
 
