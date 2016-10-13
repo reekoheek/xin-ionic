@@ -2,11 +2,10 @@ import xin from 'xin';
 
 class IonSearchbar extends xin.Component {
   get template () {
-    // <ion-searchbar color="danger" placeholder="Filter Items with Cancel" showcancelbutton="" class="searchbar-ios searchbar-ios-danger searchbar-show-cancel searchbar-left-aligned">
     return `
       <div class="searchbar-input-container">
         <div class="searchbar-search-icon"></div>
-        <input class="searchbar-input" placeholder="Filter Items with Cancel" value="{{value}}" type="search" autocomplete="off" autocorrect="off" spellcheck="false">
+        <input class="searchbar-input" placeholder$="[[placeholder]]" value="{{value}}" type="search" autocomplete="off" autocorrect="off" spellcheck="false">
         <button id="clearBtn" is="ion-button" clear class="searchbar-clear-icon">&nbsp;</button>
       </div>
     `;
@@ -18,6 +17,11 @@ class IonSearchbar extends xin.Component {
         type: String,
         notify: true,
         observer: '_valueChanged',
+      },
+
+      placeholder: {
+        type: String,
+        value: '',
       },
 
       color: {
