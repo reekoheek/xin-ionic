@@ -54,6 +54,11 @@ class IonButton extends xin.Component {
         type: Boolean,
         value: false,
       },
+
+      backbutton: {
+        type: Boolean,
+        value: false,
+      },
     };
   }
 
@@ -65,6 +70,14 @@ class IonButton extends xin.Component {
         this.__app.menu.open();
       });
     }
+
+    if (this.backbutton) {
+      this.addEventListener('click', evt => {
+        evt.preventDefault();
+
+        this.__app.fire('backbutton');
+      });
+    }
   }
 
   attached () {
@@ -73,6 +86,9 @@ class IonButton extends xin.Component {
     let mode = (this.__app && this.__app.platformMode) || 'md';
 
     let classList = ['button'];
+
+    // default
+    classList.push(`disable-hover`);
 
     // outline
     classList.push(this.outline ? `${prefix}button-outline` : `${prefix}button-default`);
@@ -111,6 +127,11 @@ class IonButton extends xin.Component {
     // menutoggle
     if (this.menutoggle) {
       classList.push(`${prefix}button-menutoggle`, `${prefix}button-menutoggle-${mode}`);
+    }
+
+    // backbutton
+    if (this.backbutton) {
+      classList.push(`back-button`, `back-button-${mode}`, `show-back-button`);
     }
 
     classList.forEach(className => {

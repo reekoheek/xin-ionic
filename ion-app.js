@@ -18,12 +18,22 @@ class IonApp extends App {
     return props;
   }
 
+  get listeners () {
+    return {
+      'backbutton': '_backButtonTapped',
+    };
+  }
+
   ready () {
     this.classList.add(this.platformMode);
   }
 
   _computePlatformMode (platform) {
     return platform === 'android' ? 'md' : platform;
+  }
+
+  _backButtonTapped () {
+    window.history.back();
   }
 }
 
