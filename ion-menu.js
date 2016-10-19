@@ -58,13 +58,19 @@ class IonMenu extends xin.Component {
 
   open () {
     this.isOpened = true;
-    this.$$('.menu-inner').style.transform = 'translateX(0)';
     this.classList.add('show-menu');
+    this.async(() => this.$$('.menu-inner').style.transform = 'translateX(0)', 1);
   }
 
   close () {
     this.isOpened = false;
-    this.classList.remove('show-menu');
+
+    let onTransitionEnd = () => {
+      this.$$('.menu-inner').removeEventListener('transitionend', onTransitionEnd);
+      this.async(() => this.classList.remove('show-menu'));
+    };
+    this.$$('.menu-inner').addEventListener('transitionend', onTransitionEnd);
+    this.$$('.menu-inner').style.transform = '';
   }
 
   toggle () {

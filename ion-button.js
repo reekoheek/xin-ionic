@@ -1,3 +1,4 @@
+/* globals location */
 import xin from 'xin';
 
 class IonButton extends xin.Component {
@@ -59,10 +60,18 @@ class IonButton extends xin.Component {
         type: Boolean,
         value: false,
       },
+
+      href: {
+        type: String,
+      },
     };
   }
 
   ready () {
+    if (this.href) {
+      this.addEventListener('click', evt => (location.href = this.href));
+    }
+
     if (this.menutoggle) {
       this.addEventListener('click', evt => {
         evt.preventDefault();
