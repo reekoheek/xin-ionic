@@ -90,7 +90,16 @@ class IonButton extends xin.Component {
   }
 
   attached () {
-    let prefix = xin.dom(this).parent('.toolbar') ? 'bar-' : '';
+    let isToolbarChild = false;
+    let parentEl = this.parentElement;
+    while (parentEl && !isToolbarChild) {
+      if (parentEl.matches('.toolbar')) {
+        isToolbarChild = true;
+      }
+      parentEl = parentEl.parentElement;
+    }
+
+    let prefix = isToolbarChild ? 'bar-' : '';
 
     let mode = (this.__app && this.__app.platformMode) || 'md';
 

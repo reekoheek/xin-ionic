@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf build && webpack && NODE_ENV=production webpack",
-    "test": "eslint ."
+    "clean": "rm -rf dist",
+    "build:webpack": "webpack",
+    "build": "npm run clean && npm run build:webpack && NODE_ENV=production npm run build:webpack",
+    "test:lint": "eslint .",
+    "test": "npm run test:lint"
   },
   "repository": {
     "type": "git",

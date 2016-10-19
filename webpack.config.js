@@ -23,7 +23,6 @@ function getPlugins () {
 
 module.exports = {
   entry: {
-    // 'xin': ['xin'],
     'ion-app': './ion-app.js',
     'ion-button': './ion-button.js',
   },

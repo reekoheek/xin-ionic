@@ -14,7 +14,7 @@ class IonMenu extends xin.Component {
   get template () {
     return `
       <div class="menu-inner"><slot></slot></div>
-      <ion-backdrop role="presentation" class="show-backdrop" style="opacity:0.35"></ion-backdrop>
+      <ion-backdrop role="presentation" class="show-backdrop"></ion-backdrop>
     `;
   }
 
@@ -59,7 +59,10 @@ class IonMenu extends xin.Component {
   open () {
     this.isOpened = true;
     this.classList.add('show-menu');
-    this.async(() => this.$$('.menu-inner').style.transform = 'translateX(0)', 1);
+    this.async(() => {
+      this.$$('.menu-inner').style.transform = 'translateX(0)';
+      this.$$('ion-backdrop').style.opacity = '0.6';
+    }, 1);
   }
 
   close () {
@@ -71,6 +74,7 @@ class IonMenu extends xin.Component {
     };
     this.$$('.menu-inner').addEventListener('transitionend', onTransitionEnd);
     this.$$('.menu-inner').style.transform = '';
+    this.$$('ion-backdrop').style.opacity = '0';
   }
 
   toggle () {
