@@ -1,6 +1,22 @@
 import xin from 'xin';
 
 class IonItem extends xin.Component {
+  get template () {
+    return `
+      <slot name="left"></slot>
+      <div class="item-inner">
+        <div class="input-wrapper">
+          <slot></slot>
+        </div>
+        <ion-reorder>
+          <ion-icon name="reorder" role="img" class="icon-md ion-md-reorder" aria-label="reorder"></ion-icon>
+        </ion-reorder>
+      </div>
+      <slot name="right"></slot>
+      <div class="button-effect"></div>
+    `;
+  }
+
   get props () {
     return {
       href: {
