@@ -1,7 +1,7 @@
 /* globals Node */
 
 import xin from 'xin';
-import alertCtrl from './helpers/alert';
+import IonAlert from './ion-alert';
 
 function clone (orig) {
   try {
@@ -44,7 +44,7 @@ class IonSelect extends xin.Component {
     let labelEl = this.parentElement.querySelector('ion-label');
     this.label = labelEl ? labelEl.textContent : 'Select';
 
-    this.inputs = this.__content.reduce((result, node) => {
+    this.inputs = this.__componentContent.reduce((result, node) => {
       if (node.nodeType === Node.ELEMENT_NODE && node.matches('ion-option')) {
         let label = node.textContent;
         result.push({
@@ -72,7 +72,7 @@ class IonSelect extends xin.Component {
 
     let inputs = clone(this.inputs);
 
-    let alert = alertCtrl.create({
+    let alert = IonAlert.create({
       title: this.label,
       inputs: inputs,
       buttons: [

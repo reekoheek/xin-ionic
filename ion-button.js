@@ -64,6 +64,16 @@ class IonButton extends xin.Component {
       href: {
         type: String,
       },
+
+      clear: {
+        type: Boolean,
+        value: false,
+      },
+
+      pickerOpt: {
+        type: Boolean,
+        value: false,
+      },
     };
   }
 
@@ -103,53 +113,62 @@ class IonButton extends xin.Component {
 
     let mode = (this.__app && this.__app.platformMode) || 'md';
 
-    let classList = ['button'];
+    let classList = ['disable-hover'];
 
-    // default
-    classList.push(`disable-hover`);
+    if (this.pickerOpt) {
+      classList.push('picker-opt', `picker-opt-$mode`, 'picker-opt-default', `picker-opt-default-${mode}`);
+    } else {
+      // default
+      classList.push(`button`);
 
-    // outline
-    classList.push(this.outline ? `${prefix}button-outline` : `${prefix}button-default`);
+      // outline
+      classList.push(this.outline ? `${prefix}button-outline` : `${prefix}button-default`);
 
-    // platform
-    classList.push(`${prefix}button-${mode}`);
-    classList.push(`${prefix}button-${this.outline ? 'outline' : 'default'}-${mode}`);
+      // platform
+      classList.push(`${prefix}button-${mode}`);
+      classList.push(`${prefix}button-${this.outline ? 'outline' : 'default'}-${mode}`);
 
-    // color
-    if (this.color) {
-      classList.push(`${prefix}button-${mode}-${this.color}`);
-    }
+      // color
+      if (this.color) {
+        classList.push(`${prefix}button-${mode}-${this.color}`);
+      }
 
-    // shape
-    if (this.full) {
-      classList.push(`${prefix}button-full`, `${prefix}button-full-${mode}`);
-    }
-    if (this.block) {
-      classList.push(`${prefix}button-block`, `${prefix}button-block-${mode}`);
-    }
-    if (this.round) {
-      classList.push(`${prefix}button-round`, `${prefix}button-round-${mode}`);
-    }
-    if (this.fab) {
-      classList.push(`${prefix}button-fab`, `${prefix}button-fab-${mode}`);
-    }
+      // shape
+      if (this.full) {
+        classList.push(`${prefix}button-full`, `${prefix}button-full-${mode}`);
+      }
+      if (this.block) {
+        classList.push(`${prefix}button-block`, `${prefix}button-block-${mode}`);
+      }
+      if (this.round) {
+        classList.push(`${prefix}button-round`, `${prefix}button-round-${mode}`);
+      }
+      if (this.fab) {
+        classList.push(`${prefix}button-fab`, `${prefix}button-fab-${mode}`);
+      }
 
-    // size
-    if (this.small) {
-      classList.push(`${prefix}button-small`, `${prefix}button-small-${mode}`);
-    }
-    if (this.large) {
-      classList.push(`${prefix}button-large`, `${prefix}button-large-${mode}`);
-    }
+      // size
+      if (this.small) {
+        classList.push(`${prefix}button-small`, `${prefix}button-small-${mode}`);
+      }
+      if (this.large) {
+        classList.push(`${prefix}button-large`, `${prefix}button-large-${mode}`);
+      }
 
-    // menutoggle
-    if (this.menutoggle) {
-      classList.push(`${prefix}button-menutoggle`, `${prefix}button-menutoggle-${mode}`);
-    }
+      // clear
+      if (this.clear) {
+        classList.push(`button-clear`, `button-clear-${mode}`);
+      }
 
-    // backbutton
-    if (this.backbutton) {
-      classList.push(`back-button`, `back-button-${mode}`, `show-back-button`);
+      // menutoggle
+      if (this.menutoggle) {
+        classList.push(`${prefix}button-menutoggle`, `${prefix}button-menutoggle-${mode}`);
+      }
+
+      // backbutton
+      if (this.backbutton) {
+        classList.push(`back-button`, `back-button-${mode}`, `show-back-button`);
+      }
     }
 
     classList.forEach(className => {

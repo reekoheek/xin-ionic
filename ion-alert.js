@@ -108,12 +108,9 @@ class IonAlert extends xin.Component {
     this.style.zIndex = '9999';
   }
 
-  attached () {
-    let mode = this.__app.platformMode || 'md';
-    this.classList.add(`alert-${mode}`);
-  }
-
   present () {
+    let mode = this.app.platformMode || 'md';
+    this.classList.add(`alert-${mode}`);
     this.app.appendChild(this);
   }
 
@@ -261,4 +258,25 @@ class IonAlert extends xin.Component {
 
 xin.define('ion-alert', IonAlert);
 
+let element;
+function create (options) {
+  if (!element) {
+    element = document.createElement('ion-alert');
+  }
+
+  options = options || {};
+
+  options.title = options.title || '';
+  options.subtitle = options.subtitle || '';
+  if (typeof options.enableBackdropDismiss === 'undefined') {
+    options.enableBackdropDismiss = true;
+  }
+
+  element.set('app', xin('app'));
+  element.set(options);
+
+  return element;
+}
+
 module.exports = IonAlert;
+module.exports.create = create;

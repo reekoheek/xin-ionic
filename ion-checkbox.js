@@ -5,7 +5,6 @@ class IonCheckbox extends xin.Component {
     return {
       value: {
         type: Boolean,
-        value: false,
         notify: true,
         observer: '_valueChanged',
       },
@@ -13,7 +12,6 @@ class IonCheckbox extends xin.Component {
   }
 
   get template () {
-    // <ion-checkbox color="vibrant" class="checkbox-ios checkbox-ios-vibrant ng-untouched ng-pristine ng-valid">
     return `
       <div id="icon" class="checkbox-icon">
         <div class="checkbox-inner"></div>
@@ -30,9 +28,6 @@ class IonCheckbox extends xin.Component {
 
     this.classList.add(`checkbox-${mode}`);
     this.classList.add(`checkbox-${mode}-vibrant`);
-    // this.classList.add(`ng-untouched`);
-    // this.classList.add(`ng-pristine`);
-    // this.classList.add(`ng-valid`);
   }
 
   _valueChanged (value) {
