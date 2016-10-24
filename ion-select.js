@@ -15,7 +15,7 @@ function clone (orig) {
 class IonSelect extends xin.Component {
   get template () {
     return `
-      <div class="select-text"></div>
+      <div class="select-text">[[_computeText(value)]]</div>
       <div class="select-icon">
         <div class="select-icon-inner"></div>
       </div>
@@ -67,10 +67,21 @@ class IonSelect extends xin.Component {
     parentEl.classList.add(`item-select`);
   }
 
+  _computeText (value) {
+    if (Array.isArray(value)) {
+      return value.join(', ');
+    }
+
+    return value || '';
+  }
+
   _selectClicked (evt) {
     evt.stopImmediatePropagation();
 
-    let inputs = clone(this.inputs);
+    let inputs = clone(this.inputs).map(input => {
+      input.checked = this.value ? (this.value.indexOf(input.value) !== -1) : false;
+      return input;
+    });
 
     let alert = IonAlert.create({
       title: this.label,
@@ -82,15 +93,7 @@ class IonSelect extends xin.Component {
         {
           text: 'OK',
           handler: data => {
-            if (this.multiple) {
-              let checkedInputs = inputs.filter(input => input.checked);
-              this.set('value', data);
-              this.$$('.select-text').textContent = checkedInputs.map(input => input.label).join(', ');
-            } else {
-              let checkedInput = inputs.find(input => input.checked);
-              this.set('value', data);
-              this.$$('.select-text').textContent = checkedInput.label;
-            }
+            this.set('value', data);
             this.set('inputs', inputs);
           },
         },

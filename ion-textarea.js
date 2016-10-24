@@ -4,7 +4,7 @@ import xin from 'xin';
 class IonTextArea extends xin.Component {
   get template () {
     return `
-      <textarea id="input" class="text-input" autocomplete="off" autocorrect="off" placeholder="" (input)="_inputChanged" (focus)="_gotFocus(evt)" (blur)="_lostFocus(evt)"></textarea>
+      <textarea id="input" class="text-input" autocomplete="off" autocorrect="off" placeholder="" (focus)="_gotFocus(evt)" (blur)="_lostFocus(evt)">[[value]]</textarea>
     `;
   }
 
@@ -14,6 +14,7 @@ class IonTextArea extends xin.Component {
         type: String,
         value: '',
         notify: true,
+        observer: '_valueChanged(value)',
       },
     };
   }
@@ -30,8 +31,10 @@ class IonTextArea extends xin.Component {
     this._itemElement.classList.add('item-input');
   }
 
-  _inputChanged () {
-    if (this.$.input.value) {
+  _valueChanged (value) {
+    if (!this._itemElement) return;
+
+    if (value) {
       this._itemElement.classList.add('input-has-value');
     } else {
       this._itemElement.classList.remove('input-has-value');

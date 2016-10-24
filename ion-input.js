@@ -4,7 +4,7 @@ import xin from 'xin';
 class IonInput extends xin.Component {
   get template () {
     return `
-      <input id="input" class="text-input" autocomplete="off" autocorrect="off" type="[[type]]" placeholder="" (input)="_inputChanged(evt)" (focus)="_gotFocus(evt)" (blur)="_lostFocus(evt)">
+      <input id="input" class="text-input" autocomplete="off" autocorrect="off" type="[[type]]" placeholder="" (focus)="_gotFocus(evt)" (blur)="_lostFocus(evt)" value="{{value}}">
       <button class="text-input-clear-icon disable-hover button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden="">
         <span class="button-inner"></span>
         <div class="button-effect"></div>
@@ -18,6 +18,7 @@ class IonInput extends xin.Component {
         type: String,
         value: '',
         notify: true,
+        observer: '_valueChanged(value)',
       },
 
       type: {
@@ -45,8 +46,10 @@ class IonInput extends xin.Component {
     this._itemElement.classList.add('item-input');
   }
 
-  _inputChanged () {
-    if (this.$.input.value) {
+  _valueChanged (value) {
+    if (!this._itemElement) return;
+
+    if (value) {
       this._itemElement.classList.add('input-has-value');
     } else {
       this._itemElement.classList.remove('input-has-value');
