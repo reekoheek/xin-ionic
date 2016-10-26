@@ -3,7 +3,7 @@ import xin from 'xin';
 class IonActionSheet extends xin.Component {
   get template () {
     return `
-      <ion-backdrop disable-activated="" role="presentation" tappable="" style="opacity: 0.4;"></ion-backdrop>
+      <ion-backdrop (click)="_ionBackdropClicked(evt)" role="presentation" style="opacity: 0.4;"></ion-backdrop>
       <div class="action-sheet-wrapper" style="transform: translateY(0%);">
         <div class="action-sheet-container">
           <div class="action-sheet-group">
@@ -16,12 +16,6 @@ class IonActionSheet extends xin.Component {
         </div>
       </div>
     `;
-  }
-
-  get listeners () {
-    return {
-      'click ion-backdrop': '_ionBackdropClicked(evt)',
-    };
   }
 
   created () {
@@ -61,7 +55,7 @@ function create (options) {
   // }
 
   element.set('app', xin('app'));
-  element.set(options);
+  element.all(options);
 
   return element;
 }

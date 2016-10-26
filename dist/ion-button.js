@@ -33,36 +33,33 @@ webpackJsonp([1],[
 	  }
 	
 	  _createClass(IonButton, [{
-	    key: 'ready',
-	    value: function ready() {
-	      var _this2 = this;
+	    key: '_handleClicked',
+	    value: function _handleClicked(evt) {
+	      evt.preventDefault();
+	      evt.stopImmediatePropagation();
 	
 	      if (this.href) {
-	        this.addEventListener('click', function (evt) {
-	          return location.href = _this2.href;
-	        });
+	        location.href = this.href;
+	        return;
 	      }
 	
 	      if (this.menutoggle) {
-	        this.addEventListener('click', function (evt) {
-	          evt.preventDefault();
-	
-	          _this2.__app.menu.open();
-	        });
+	        this.__app.menu.open();
+	        return;
 	      }
 	
 	      if (this.backbutton) {
-	        this.addEventListener('click', function (evt) {
-	          evt.preventDefault();
-	
-	          _this2.__app.fire('backbutton');
-	        });
+	        this.__app.fire('backbutton');
 	      }
 	    }
 	  }, {
 	    key: 'attached',
 	    value: function attached() {
-	      var _this3 = this;
+	      var _this2 = this;
+	
+	      if (this.href || this.menutoggle || this.backbutton) {
+	        this.addEventListener('click', this._handleClicked.bind(this));
+	      }
 	
 	      var isToolbarChild = false;
 	      var parentEl = this.parentElement;
@@ -77,57 +74,66 @@ webpackJsonp([1],[
 	
 	      var mode = this.__app && this.__app.platformMode || 'md';
 	
-	      var classList = ['button'];
+	      var classList = ['disable-hover'];
 	
-	      // default
-	      classList.push('disable-hover');
+	      if (this.pickerOpt) {
+	        classList.push('picker-opt', 'picker-opt-$mode', 'picker-opt-default', 'picker-opt-default-' + mode);
+	      } else {
+	        // default
+	        classList.push('button');
 	
-	      // outline
-	      classList.push(this.outline ? prefix + 'button-outline' : prefix + 'button-default');
+	        // outline
+	        classList.push(this.outline ? prefix + 'button-outline' : prefix + 'button-default');
 	
-	      // platform
-	      classList.push(prefix + 'button-' + mode);
-	      classList.push(prefix + 'button-' + (this.outline ? 'outline' : 'default') + '-' + mode);
+	        // platform
+	        classList.push(prefix + 'button-' + mode);
+	        classList.push(prefix + 'button-' + (this.outline ? 'outline' : 'default') + '-' + mode);
 	
-	      // color
-	      if (this.color) {
-	        classList.push(prefix + 'button-' + mode + '-' + this.color);
-	      }
+	        // color
+	        if (this.color) {
+	          classList.push(prefix + 'button-' + mode + '-' + this.color);
+	        }
 	
-	      // shape
-	      if (this.full) {
-	        classList.push(prefix + 'button-full', prefix + 'button-full-' + mode);
-	      }
-	      if (this.block) {
-	        classList.push(prefix + 'button-block', prefix + 'button-block-' + mode);
-	      }
-	      if (this.round) {
-	        classList.push(prefix + 'button-round', prefix + 'button-round-' + mode);
-	      }
-	      if (this.fab) {
-	        classList.push(prefix + 'button-fab', prefix + 'button-fab-' + mode);
-	      }
+	        // shape
+	        if (this.full) {
+	          classList.push(prefix + 'button-full', prefix + 'button-full-' + mode);
+	        }
+	        if (this.block) {
+	          classList.push(prefix + 'button-block', prefix + 'button-block-' + mode);
+	        }
+	        if (this.round) {
+	          classList.push(prefix + 'button-round', prefix + 'button-round-' + mode);
+	        }
+	        if (this.fab) {
+	          classList.push(prefix + 'button-fab', prefix + 'button-fab-' + mode);
+	        }
 	
-	      // size
-	      if (this.small) {
-	        classList.push(prefix + 'button-small', prefix + 'button-small-' + mode);
-	      }
-	      if (this.large) {
-	        classList.push(prefix + 'button-large', prefix + 'button-large-' + mode);
-	      }
+	        // size
+	        if (this.small) {
+	          classList.push(prefix + 'button-small', prefix + 'button-small-' + mode);
+	        }
+	        if (this.large) {
+	          classList.push(prefix + 'button-large', prefix + 'button-large-' + mode);
+	        }
 	
-	      // menutoggle
-	      if (this.menutoggle) {
-	        classList.push(prefix + 'button-menutoggle', prefix + 'button-menutoggle-' + mode);
-	      }
+	        // clear
+	        if (this.clear) {
+	          classList.push('button-clear', 'button-clear-' + mode);
+	        }
 	
-	      // backbutton
-	      if (this.backbutton) {
-	        classList.push('back-button', 'back-button-' + mode, 'show-back-button');
+	        // menutoggle
+	        if (this.menutoggle) {
+	          classList.push(prefix + 'button-menutoggle', prefix + 'button-menutoggle-' + mode);
+	        }
+	
+	        // backbutton
+	        if (this.backbutton) {
+	          classList.push('back-button', 'back-button-' + mode, 'show-back-button');
+	        }
 	      }
 	
 	      classList.forEach(function (className) {
-	        _this3.classList.add(className);
+	        _this2.classList.add(className);
 	      });
 	    }
 	  }, {
@@ -191,6 +197,16 @@ webpackJsonp([1],[
 	
 	        href: {
 	          type: String
+	        },
+	
+	        clear: {
+	          type: Boolean,
+	          value: false
+	        },
+	
+	        pickerOpt: {
+	          type: Boolean,
+	          value: false
 	        }
 	      };
 	    }

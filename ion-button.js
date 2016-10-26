@@ -77,29 +77,30 @@ class IonButton extends xin.Component {
     };
   }
 
-  ready () {
+  _handleClicked (evt) {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+
     if (this.href) {
-      this.addEventListener('click', evt => (location.href = this.href));
+      location.href = this.href;
+      return;
     }
 
     if (this.menutoggle) {
-      this.addEventListener('click', evt => {
-        evt.preventDefault();
-
-        this.__app.menu.open();
-      });
+      this.__app.menu.open();
+      return;
     }
 
     if (this.backbutton) {
-      this.addEventListener('click', evt => {
-        evt.preventDefault();
-
-        this.__app.fire('backbutton');
-      });
+      this.__app.fire('backbutton');
     }
   }
 
   attached () {
+    if (this.href || this.menutoggle || this.backbutton) {
+      this.addEventListener('click', this._handleClicked.bind(this));
+    }
+
     let isToolbarChild = false;
     let parentEl = this.parentElement;
     while (parentEl && !isToolbarChild) {

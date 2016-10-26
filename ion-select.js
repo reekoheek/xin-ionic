@@ -68,18 +68,30 @@ class IonSelect extends xin.Component {
   }
 
   _computeText (value) {
-    if (Array.isArray(value)) {
-      return value.join(', ');
+    if (!this.inputs) {
+      return;
     }
 
-    return value || '';
+    if (Array.isArray(value)) {
+      return value.map(value => {
+        let input = this.inputs.find(inp => inp.value === value);
+        return input ? input.label : '';
+      }).join(', ');
+    }
+
+    let input = this.inputs.find(inp => inp.value === value);
+    return input ? input.label : '';
   }
 
   _selectClicked (evt) {
     evt.stopImmediatePropagation();
 
     let inputs = clone(this.inputs).map(input => {
-      input.checked = this.value ? (this.value.indexOf(input.value) !== -1) : false;
+      if (this.multiple) {
+        input.checked = this.value ? (this.value.indexOf(input.value) !== -1) : false;
+      } else {
+        input.checked = this.value === input.value;
+      }
       return input;
     });
 

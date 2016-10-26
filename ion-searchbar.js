@@ -5,8 +5,18 @@ class IonSearchbar extends xin.Component {
     return `
       <div class="searchbar-input-container">
         <div class="searchbar-search-icon"></div>
-        <input class="searchbar-input" placeholder$="[[placeholder]]" value="{{value}}" type="search" autocomplete="off" autocorrect="off" spellcheck="false">
-        <button id="clearBtn" is="ion-button" clear class="searchbar-clear-icon">&nbsp;</button>
+        <input class="searchbar-input" placeholder$="[[placeholder]]"
+          value="{{value}}"
+          type="search"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          (focus)="_inputFocused(evt)"
+          (blur)="_inputBlurred(evt)">
+        <button is="ion-button" clear
+          class="searchbar-clear-icon"
+          (click)="_buttonTapped(evt)"
+          id="clearBtn">&nbsp;</button>
       </div>
     `;
   }
@@ -28,14 +38,6 @@ class IonSearchbar extends xin.Component {
         type: String,
         value: 'danger',
       },
-    };
-  }
-
-  get listeners () {
-    return {
-      'focus input': '_inputFocused',
-      'blur input': '_inputBlurred',
-      'click button': '_buttonTapped',
     };
   }
 

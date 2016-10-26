@@ -177,7 +177,7 @@ function create (options) {
     element = document.createElement('ion-picker');
   }
 
-  element.set(options);
+  element.all(options);
 
   return element;
 }

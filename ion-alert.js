@@ -38,7 +38,7 @@ class IonAlert extends xin.Component {
 
   get template () {
     return `
-      <ion-backdrop role="presentation" style="opacity: 0.5;"></ion-backdrop>
+      <ion-backdrop (click)="_ionBackdropClicked(evt)" role="presentation" style="opacity: 0.5;"></ion-backdrop>
       <div class="alert-wrapper" style="opacity: 1; transform: scale(1);">
         <div class="alert-head">
           <h2 class="alert-title">[[title]]</h2>
@@ -92,7 +92,6 @@ class IonAlert extends xin.Component {
 
   get listeners () {
     return {
-      'click ion-backdrop': '_ionBackdropClicked(evt)',
       'click .alert-checkbox': '_checkboxClicked(evt)',
       'click .alert-radio': '_radioClicked(evt)',
       'click .alert-button': '_buttonClicked(evt)',
@@ -223,25 +222,27 @@ class IonAlert extends xin.Component {
 
     let item = model.get(repeat.as);
 
-    let result; ;;;
-    this.inputs.forEach(input => {
-      if (input.type === 'checkbox') {
-        if (input.checked) {
-          result = result || [];
-          result.push('value' in input ? input.value : input.label);
+    let result;
+    if (this.inputs) {
+      this.inputs.forEach(input => {
+        if (input.type === 'checkbox') {
+          if (input.checked) {
+            result = result || [];
+            result.push('value' in input ? input.value : input.label);
+          }
+        } else if (input.type === 'radio') {
+          if (input.checked) {
+            result = 'value' in input ? input.value : input.label;
+            return false;
+          }
+        } else {
+          if ('name' in 'input') {
+            result = result || {};
+            result[input.name] = input.value;
+          }
         }
-      } else if (input.type === 'radio') {
-        if (input.checked) {
-          result = 'value' in input ? input.value : input.label;
-          return false;
-        }
-      } else {
-        if ('name' in 'input') {
-          result = result || {};
-          result[input.name] = input.value;
-        }
-      }
-    });
+      });
+    }
 
     let handler = item.handler || DEFAULT_HANDLER;
     if (handler(result) !== false) {
@@ -273,7 +274,7 @@ function create (options) {
   }
 
   element.set('app', xin('app'));
-  element.set(options);
+  element.all(options);
 
   return element;
 }
