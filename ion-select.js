@@ -1,5 +1,3 @@
-/* globals Node */
-
 import xin from 'xin';
 import IonAlert from './ion-alert';
 
@@ -45,7 +43,7 @@ class IonSelect extends xin.Component {
     this.label = labelEl ? labelEl.textContent : 'Select';
 
     this.inputs = this.__componentContent.reduce((result, node) => {
-      if (node.nodeType === Node.ELEMENT_NODE && node.matches('ion-option')) {
+      if (node.nodeType === window.Node.ELEMENT_NODE && node.matches('ion-option')) {
         let label = node.textContent;
         result.push({
           type: this.multiple ? 'checkbox' : 'radio',

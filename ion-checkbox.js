@@ -31,6 +31,10 @@ class IonCheckbox extends xin.Component {
   }
 
   _valueChanged (value) {
+    if (!this.$.icon) {
+      return;
+    }
+
     if (value) {
       this.$.icon.classList.add('checkbox-checked');
     } else {

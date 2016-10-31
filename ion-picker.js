@@ -1,6 +1,18 @@
-const xin = require('xin');
+import xin from 'xin';
+
+let element;
 
 class IonPickerCol extends xin.Component {
+  static create (options) {
+    if (!element) {
+      element = document.createElement('ion-picker');
+    }
+
+    element.all(options);
+
+    return element;
+  }
+
   get template () {
     return `
       <div class="picker-opts" (touchstart)="_touchStarted(evt)" (touchmove)="_touchMoved(evt)" (touchend)="_touchEnd(evt)">
@@ -171,16 +183,4 @@ class IonPicker extends xin.Component {
 
 xin.define('ion-picker', IonPicker);
 
-let element;
-function create (options) {
-  if (!element) {
-    element = document.createElement('ion-picker');
-  }
-
-  element.all(options);
-
-  return element;
-}
-
-module.exports = IonPicker;
-module.exports.create = create;
+export default IonPicker;

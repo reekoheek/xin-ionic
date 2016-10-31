@@ -3,25 +3,22 @@ import App from 'xin/components/app';
 
 class IonApp extends App {
   get props () {
-    let props = super.props;
-
-    props.platform = {
-      type: String,
-      value: 'android',
-    };
-
-    props.platformMode = {
-      type: String,
-      computed: '_computePlatformMode(platform)',
-    };
-
-    return props;
+    return xin.mix(super.props, {
+      platform: {
+        type: String,
+        value: 'android',
+      },
+      platformMode: {
+        type: String,
+        computed: '_computePlatformMode(platform)',
+      },
+    });
   }
 
   get listeners () {
-    return {
+    return xin.mix(super.listeners, {
       'backbutton': '_backButtonTapped',
-    };
+    });
   }
 
   ready () {

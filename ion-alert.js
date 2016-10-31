@@ -1,8 +1,29 @@
-const xin = require('xin');
+import xin from 'xin';
 
 const DEFAULT_HANDLER = () => {};
 
+let element;
+
 class IonAlert extends xin.Component {
+  static create (options) {
+    if (!element) {
+      element = document.createElement('ion-alert');
+    }
+
+    options = options || {};
+
+    options.title = options.title || '';
+    options.subtitle = options.subtitle || '';
+    if (typeof options.enableBackdropDismiss === 'undefined') {
+      options.enableBackdropDismiss = true;
+    }
+
+    element.set('app', xin('app'));
+    element.all(options);
+
+    return element;
+  }
+
   get props () {
     return {
       title: {
@@ -236,7 +257,7 @@ class IonAlert extends xin.Component {
             return false;
           }
         } else {
-          if ('name' in 'input') {
+          if ('name' in input) {
             result = result || {};
             result[input.name] = input.value;
           }
@@ -259,25 +280,4 @@ class IonAlert extends xin.Component {
 
 xin.define('ion-alert', IonAlert);
 
-let element;
-function create (options) {
-  if (!element) {
-    element = document.createElement('ion-alert');
-  }
-
-  options = options || {};
-
-  options.title = options.title || '';
-  options.subtitle = options.subtitle || '';
-  if (typeof options.enableBackdropDismiss === 'undefined') {
-    options.enableBackdropDismiss = true;
-  }
-
-  element.set('app', xin('app'));
-  element.all(options);
-
-  return element;
-}
-
-module.exports = IonAlert;
-module.exports.create = create;
+export default IonAlert;

@@ -13,6 +13,19 @@ class IonMenu extends xin.Component {
 
   get template () {
     return `
+      <style>
+      ion-menu ion-backdrop {
+        transition: opacity .3s;
+        will-change: opacity;
+      }
+
+      ion-menu .menu-inner {
+        transition: transform .3s;
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        will-change: transform, -webkit-transform;
+      }
+      </style>
       <div class="menu-inner"><slot></slot></div>
       <ion-backdrop (click)="close" role="presentation" class="show-backdrop"></ion-backdrop>
     `;

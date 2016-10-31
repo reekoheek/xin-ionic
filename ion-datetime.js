@@ -2,8 +2,6 @@ import xin from 'xin';
 import IonPicker from './ion-picker';
 import moment from 'moment';
 
-window.moment = moment;
-
 const FORMATTING_TOKENS = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
 const ELIGIBLE_TOKENS = ['h', 'hh', 'H', 'HH', 'm', 'mm', 's', 'ss', 'S', 'SS', 'a', 'A', 'M', 'MM', 'MMM', 'DD', 'YYYY'];
 
@@ -12,8 +10,6 @@ const HOURS = (() => { let days = []; for (let i = 0; i < 24; i++) days.push(i);
 const MINUTES = (() => { let days = []; for (let i = 0; i < 60; i++) days.push(i); return days; })();
 const MONTHS = (() => { let days = []; for (let i = 0; i < 12; i++) days.push(i); return days; })();
 const AMPM = ['am', 'pm'];
-
-window.moment = require('moment');
 
 const NOW = new Date();
 

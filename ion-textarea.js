@@ -19,6 +19,18 @@ class IonTextArea extends xin.Component {
     };
   }
 
+  get itemElement () {
+    if (!this._itemElement) {
+      let itemEl = this.parentElement;
+      while (itemEl && !itemEl.matches('ion-item')) {
+        itemEl = itemEl.parentElement;
+      }
+      this._itemElement = itemEl;
+    }
+
+    return this._itemElement;
+  }
+
   attached () {
     let mode = (this.__app && this.__app.platformMode) || 'md';
     this.classList.add(`text-input-${mode}`);
@@ -27,29 +39,27 @@ class IonTextArea extends xin.Component {
     while (itemEl && !itemEl.matches('ion-item')) {
       itemEl = itemEl.parentElement;
     }
-    this._itemElement = itemEl;
-    this._itemElement.classList.add('item-input');
+
+    this.itemElement.classList.add('item-input');
   }
 
   _valueChanged (value) {
-    if (!this._itemElement) return;
-
     if (value) {
-      this._itemElement.classList.add('input-has-value');
+      this.itemElement.classList.add('input-has-value');
     } else {
-      this._itemElement.classList.remove('input-has-value');
+      this.itemElement.classList.remove('input-has-value');
     }
   }
 
   _gotFocus (evt) {
     evt.stopImmediatePropagation();
-    this._itemElement.classList.add('input-has-focus');
+    this.itemElement.classList.add('input-has-focus');
     this.fire('focus');
   }
 
   _lostFocus (evt) {
     evt.stopImmediatePropagation();
-    this._itemElement.classList.remove('input-has-focus');
+    this.itemElement.classList.remove('input-has-focus');
     this.fire('blur');
   }
 }

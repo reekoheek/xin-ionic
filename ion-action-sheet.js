@@ -1,6 +1,27 @@
 import xin from 'xin';
 
+let element;
+
 class IonActionSheet extends xin.Component {
+  static create (options) {
+    if (!element) {
+      element = document.createElement('ion-action-sheet');
+    }
+
+    // options = options || {};
+    //
+    // options.title = options.title || '';
+    // options.subtitle = options.subtitle || '';
+    // if (typeof options.enableBackdropDismiss === 'undefined') {
+    //   options.enableBackdropDismiss = true;
+    // }
+
+    element.set('app', xin('app'));
+    element.all(options);
+
+    return element;
+  }
+
   get template () {
     return `
       <ion-backdrop (click)="_ionBackdropClicked(evt)" role="presentation" style="opacity: 0.4;"></ion-backdrop>
@@ -40,25 +61,4 @@ class IonActionSheet extends xin.Component {
 
 xin.define('ion-action-sheet', IonActionSheet);
 
-let element;
-function create (options) {
-  if (!element) {
-    element = document.createElement('ion-action-sheet');
-  }
-
-  // options = options || {};
-  //
-  // options.title = options.title || '';
-  // options.subtitle = options.subtitle || '';
-  // if (typeof options.enableBackdropDismiss === 'undefined') {
-  //   options.enableBackdropDismiss = true;
-  // }
-
-  element.set('app', xin('app'));
-  element.all(options);
-
-  return element;
-}
-
-module.exports = IonActionSheet;
-module.exports.create = create;
+export default IonActionSheet;
