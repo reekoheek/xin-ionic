@@ -33,11 +33,9 @@ class IonContent extends xin.Component {
 
   attached () {
     if (this.scrollX || this.scrollY) {
-      this.__templateModel.addEventListener('focusing', () => {
-        this.async(() => {
-          this.scrollTop = 0;
-          this.scrollLeft = 0;
-        });
+      this.__templateModel.addEventListener('blur', () => {
+        this.scrollTop = 0;
+        this.scrollLeft = 0;
       });
     }
   }

@@ -32,28 +32,30 @@ class IonSelect extends xin.Component {
 
       value: {
         type: Object,
-        value: () => {},
+        value: () => ({}),
         notify: true,
       },
     };
   }
 
-  ready () {
-    let labelEl = this.parentElement.querySelector('ion-label');
-    this.label = labelEl ? labelEl.textContent : 'Select';
-
-    this.inputs = this.__componentContent.reduce((result, node) => {
+  created () {
+    this.inputs = [];
+    [].forEach.call(this.children, node => {
       if (node.nodeType === window.Node.ELEMENT_NODE && node.matches('ion-option')) {
         let label = node.textContent;
-        result.push({
+        this.inputs.push({
           type: this.multiple ? 'checkbox' : 'radio',
           value: node.hasAttribute('value') ? node.getAttribute('value') : label,
           label: label,
           checked: node.hasAttribute('checked'),
         });
       }
-      return result;
-    }, []);
+    });
+  }
+
+  ready () {
+    let labelEl = this.parentElement.querySelector('ion-label');
+    this.label = labelEl ? labelEl.textContent : 'Select';
   }
 
   attached () {

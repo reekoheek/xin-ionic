@@ -1,6 +1,6 @@
 import xin from 'xin';
 
-const DEFAULT_HANDLER = () => {};
+const DEFAULT_HANDLER = () => ({});
 
 let element;
 
@@ -28,6 +28,7 @@ class IonAlert extends xin.Component {
     return {
       title: {
         type: String,
+        value: '',
         observer: '_titleChanged',
       },
 
@@ -141,6 +142,9 @@ class IonAlert extends xin.Component {
   _titleChanged (title) {
     this.async(() => {
       let placeholderEl = this.$$('.alert-title');
+      if (!placeholderEl) {
+        return;
+      }
       if (title) {
         placeholderEl.style.display = '';
       } else {
@@ -152,6 +156,9 @@ class IonAlert extends xin.Component {
   _subtitleChanged (subtitle) {
     this.async(() => {
       let placeholderEl = this.$$('.alert-sub-title');
+      if (!placeholderEl) {
+        return;
+      }
       if (subtitle) {
         placeholderEl.style.display = '';
       } else {
@@ -163,6 +170,9 @@ class IonAlert extends xin.Component {
   _messageChanged (message) {
     this.async(() => {
       let placeholderEl = this.$$('.alert-message');
+      if (!placeholderEl) {
+        return;
+      }
       if (message) {
         placeholderEl.style.display = '';
       } else {
@@ -174,6 +184,9 @@ class IonAlert extends xin.Component {
   _buttonsChanged (buttons) {
     this.async(() => {
       let placeholderEl = this.$$('.alert-button-group');
+      if (!placeholderEl) {
+        return;
+      }
       if (buttons) {
         placeholderEl.style.display = '';
       } else {

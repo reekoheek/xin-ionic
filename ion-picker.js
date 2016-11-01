@@ -71,13 +71,15 @@ class IonPickerCol extends xin.Component {
     if (index === -1) {
       index = this.col.options[0]._y > 0 ? 0 : this.col.options.length - 1;
     }
-    this.set('selectedIndex', index);
-    this.notify('selectedIndex');
+    // force notify selected index
+    this['selectedIndex'] = index;
+    this.notify('selectedIndex', index);
   }
 
   _colChanged (col) {
-    this.selectedIndex = col ? col.selectedIndex : -1;
-    this.notify('selectedIndex');
+    let index = col ? col.selectedIndex : -1;
+    this.selectedIndex = index;
+    this.notify('selectedIndex', index);
   }
 
   _selectedIndexChanged (index) {

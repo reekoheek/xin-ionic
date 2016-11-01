@@ -98,7 +98,8 @@ class IonButton extends xin.Component {
 
   attached () {
     if (this.href || this.menutoggle || this.backbutton) {
-      this.addEventListener('click', this._handleClicked.bind(this));
+      this.addEventListener('click', evt => this._handleClicked(evt));
+      // xin.event.on('click', this, evt => this._handleClicked(evt));
     }
 
     let isToolbarChild = false;
