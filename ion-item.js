@@ -21,21 +21,29 @@ class IonItem extends xin.Component {
     return {
       href: {
         type: String,
+        observer: '_computeHref(href)',
       },
     };
   }
 
   attached () {
-    if (this.href) {
-      this.addEventListener('click', evt => {
-        this.__app.menu.close();
-        window.location.href = this.href;
-      });
-    }
     let mode = this.__app && this.__app.platformMode || 'md';
     this.classList.add(`item-block`);
     this.classList.add(`item`);
     this.classList.add(`item-${mode}`);
+  }
+
+  _computeHref (href) {
+    if (href) {
+      this.on('click', this._clicked);
+    } else {
+      this.off('click', this._clicked);
+    }
+  }
+
+  _clicked (evt) {
+    evt.stopImmediatePropagation();
+    this.__app.menu.close().then(() => (window.location.href = this.href));
   }
 }
 

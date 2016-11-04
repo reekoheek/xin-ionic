@@ -1,7 +1,5 @@
 import xin from 'xin';
 
-import './css/ion-header.css';
-
 class IonHeader extends xin.Component {
 
 }

@@ -1,22 +1,25 @@
 const webpack = require('webpack');
 const path = require('path');
 
-console.info('ENV', process.env.NODE_ENV);
+const ENV = process.env.NODE_ENV || 'development';
+const ANALYZE = process.env.ANALYZE || false;
+
+console.info(`
+  ENV ${ENV}
+  ANALYZE ${ANALYZE}
+`);
 
 function getPlugins () {
-  let plugins = [];
+  let plugins = [
+    new webpack.optimize.CommonsChunkPlugin('xin', ENV === 'production' ? 'xin.min.js' : 'xin.js'),
+  ];
 
-  if (process.env.NODE_ENV === 'production') {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-    }));
-    plugins.push(new webpack.optimize.DedupePlugin());
+  if (ENV === 'production') {
+    plugins.push(
+      new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
+      new webpack.optimize.DedupePlugin()
+    );
   }
-
-  plugins.push(new webpack.optimize.CommonsChunkPlugin({
-    name: 'xin',
-    filename: process.env.NODE_ENV === 'production' ? 'xin.min.js' : 'xin.js',
-  }));
 
   return plugins;
 }
@@ -28,7 +31,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: process.env.NODE_ENV === 'production' ? '[name].min.js' : '[name].js',
+    filename: ENV === 'production' ? '[name].min.js' : '[name].js',
   },
   devtool: 'source-map',
   plugins: getPlugins(),
@@ -36,15 +39,15 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'style-loader!css-loader',
+        include: /\/(css|node_modules\/xin)\//,
+        loader: 'style!css',
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: require.resolve('babel-loader'),
+        include: /(ion-\w+\.js|node_modules\/(xin|template-binding)\/)/,
+        loader: 'babel',
         query: {
-          presets: ['babel-preset-es2015', 'babel-preset-es2016', 'babel-preset-es2017'].map(require.resolve),
+          cacheDirectory: true,
         },
       },
     ],

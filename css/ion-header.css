@@ -1,6 +1,0 @@
-.menu-inner > slot > ion-header,
-.menu-inner > slot > ion-footer,
-.xin-view > ion-header,
-.xin-view > ion-footer {
-  position: relative;
-}

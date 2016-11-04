@@ -1,9 +1,10 @@
 import xin from 'xin';
 import App from 'xin/components/app';
+import _ from 'lodash';
 
 class IonApp extends App {
   get props () {
-    return xin.mix(super.props, {
+    return _.defaults({
       platform: {
         type: String,
         value: 'android',
@@ -12,16 +13,24 @@ class IonApp extends App {
         type: String,
         computed: '_computePlatformMode(platform)',
       },
-    });
+    }, super.props);
   }
 
   get listeners () {
-    return xin.mix(super.listeners, {
+    return _.defaults({
       'backbutton': '_backButtonTapped',
-    });
+    }, super.listeners);
+  }
+
+  created () {
+    super.created();
+
+    this.style.height = `${window.innerHeight}px`;
   }
 
   ready () {
+    super.ready();
+
     this.classList.add(this.platformMode);
   }
 

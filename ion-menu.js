@@ -49,15 +49,24 @@ class IonMenu extends xin.Component {
   }
 
   close () {
-    this.isOpened = false;
+    return new Promise((resolve, reject) => {
+      if (!this.isOpened) {
+        return resolve();
+      }
 
-    let onTransitionEnd = () => {
-      this.$$('.menu-inner').removeEventListener('transitionend', onTransitionEnd);
-      this.async(() => this.classList.remove('show-menu'));
-    };
-    this.$$('.menu-inner').addEventListener('transitionend', onTransitionEnd);
-    this.$$('.menu-inner').style.transform = '';
-    this.$$('ion-backdrop').style.opacity = '0';
+      this.isOpened = false;
+
+      let onTransitionEnd = () => {
+        this.off('transitionend', '.menu-inner', onTransitionEnd);
+        this.async(() => {
+          this.classList.remove('show-menu');
+          resolve();
+        });
+      };
+      this.on('transitionend', '.menu-inner', onTransitionEnd);
+      this.$$('.menu-inner').style.transform = '';
+      this.$$('ion-backdrop').style.opacity = '0';
+    });
   }
 
   toggle () {

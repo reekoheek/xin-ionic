@@ -3,16 +3,6 @@ import xin from 'xin';
 let element;
 
 class IonPickerCol extends xin.Component {
-  static create (options) {
-    if (!element) {
-      element = document.createElement('ion-picker');
-    }
-
-    element.all(options);
-
-    return element;
-  }
-
   get template () {
     return `
       <div class="picker-opts" (touchstart)="_touchStarted(evt)" (touchmove)="_touchMoved(evt)" (touchend)="_touchEnd(evt)">
@@ -106,6 +96,16 @@ class IonPickerCol extends xin.Component {
 xin.define('ion-picker-col', IonPickerCol, { extends: 'div' });
 
 class IonPicker extends xin.Component {
+  static create (options) {
+    if (!element) {
+      element = document.createElement('ion-picker');
+    }
+
+    element.all(options);
+
+    return element;
+  }
+
   get template () {
     return `
       <ion-backdrop (click)="_cancelClicked(evt)" disable-activated="" role="presentation" tappable="" style="opacity: 0.26;"></ion-backdrop>

@@ -58,7 +58,7 @@ webpackJsonp([1],[
 	      var _this2 = this;
 	
 	      if (this.href || this.menutoggle || this.backbutton) {
-	        this.addEventListener('click', this._handleClicked.bind(this));
+	        this.on('click', this._handleClicked);
 	      }
 	
 	      var isToolbarChild = false;

@@ -152,7 +152,7 @@ class IonDateTime extends xin.Component {
           unparsedTokens.push(token);
       }
 
-      let options = xin.v(column.options);
+      let options = xin.object.v(column.options);
       let selected = options.find(c => {
         return c.label === now.format(token);
       });
