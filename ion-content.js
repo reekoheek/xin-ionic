@@ -5,11 +5,11 @@ import './css/ion-content.css';
 xin.event(document).on('focusing', (evt) => {
   let target = evt.target;
   let content = target.querySelector('ion-content');
-  if (content) {
+  if (content && !content._resized) {
     target.style.visibility = 'hidden';
     target.style.display = 'block';
 
-    content.resize();
+    content._resize();
 
     target.style.display = '';
     target.style.visibility = '';
@@ -50,6 +50,8 @@ class IonContent extends xin.Component {
   attached () {
     super.attached();
 
+    this._resized = false;
+
     if (this.scrollX || this.scrollY) {
       this.__templateModel.on('blur', evt => {
         this.scrollTop = 0;
@@ -58,20 +60,24 @@ class IonContent extends xin.Component {
     }
   }
 
-  resize () {
+  _resize () {
+    let paddingTop = 0;
+    let paddingBottom = 0;
+
     let el = this;
-    let topPadding = 0;
-    let bottomPadding = 0;
     while ((el = el.previousElementSibling)) {
-      topPadding += el.clientHeight;
-    }
-    el = this;
-    while ((el = el.nextElementSibling)) {
-      bottomPadding += el.clientHeight;
+      paddingTop += el.clientHeight;
     }
 
-    this.style.paddingTop = topPadding + 'px';
-    this.style.paddingBottom = bottomPadding + 'px';
+    el = this;
+    while ((el = el.nextElementSibling)) {
+      paddingBottom += el.clientHeight;
+    }
+
+    this.style.paddingTop = paddingTop + 'px';
+    this.style.paddingBottom = paddingBottom + 'px';
+
+    this._resized = true;
   }
 }
 
