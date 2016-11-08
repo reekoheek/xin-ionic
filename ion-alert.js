@@ -18,7 +18,6 @@ class IonAlert extends xin.Component {
       options.enableBackdropDismiss = true;
     }
 
-    element.set('app', xin('app'));
     element.all(options);
 
     return element;
@@ -60,8 +59,8 @@ class IonAlert extends xin.Component {
 
   get template () {
     return `
-      <ion-backdrop (click)="_ionBackdropClicked(evt)" role="presentation" style="opacity: 0.5;"></ion-backdrop>
-      <div class="alert-wrapper" style="opacity: 1; transform: scale(1);">
+      <ion-backdrop id="backDrop" (click)="_ionBackdropClicked(evt)" role="presentation"></ion-backdrop>
+      <div class="alert-wrapper">
         <div class="alert-head">
           <h2 class="alert-title">[[title]]</h2>
           <h3 class="alert-sub-title">[[subtitle]]</h3>
@@ -130,13 +129,34 @@ class IonAlert extends xin.Component {
   }
 
   present () {
-    let mode = this.app.platformMode || 'md';
-    this.classList.add(`alert-${mode}`);
-    this.app.appendChild(this);
+    xin('app').appendChild(this);
+
+    this.async(() => {
+      let mode = xin('app').platformMode || 'md';
+      this.classList.add(`alert-${mode}`);
+
+      let alertWrapperEl = this.$$('.alert-wrapper');
+      this.$.backDrop.style.opacity = 0.6;
+      alertWrapperEl.style.opacity = 1;
+      alertWrapperEl.style.transform = 'scale(1)';
+      alertWrapperEl.style.webkitTransform = 'scale(1)';
+    }, 100);
   }
 
   dismiss () {
-    this.app.removeChild(this);
+    let alertWrapperEl = this.$$('.alert-wrapper');
+
+    this.$.backDrop.style.opacity = '';
+    alertWrapperEl.style.opacity = '';
+    alertWrapperEl.style.transform = '';
+    alertWrapperEl.style.webkitTransform = '';
+
+    xin.event(this.$.backDrop).on('transitionend', () => {
+      xin.event(this.$.backDrop).off('transitionend');
+      this.async(() => {
+        xin('app').removeChild(this);
+      });
+    });
   }
 
   _titleChanged (title) {

@@ -2,7 +2,7 @@ import xin from 'xin';
 import IonPicker from './ion-picker';
 import moment from 'moment';
 
-const FORMATTING_TOKENS = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
+const FORMATTING_TOKENS = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g; // eslint-disable-line no-useless-escape
 const ELIGIBLE_TOKENS = ['h', 'hh', 'H', 'HH', 'm', 'mm', 's', 'ss', 'S', 'SS', 'a', 'A', 'M', 'MM', 'MMM', 'DD', 'YYYY'];
 
 const DAY_HOURS = (() => { let days = []; for (let i = 0; i < 12; i++) days.push(i + 1); return days; })();
@@ -177,7 +177,8 @@ class IonDateTime extends xin.Component {
           moment(this.pickerFormat.match(FORMATTING_TOKENS).map((token, index) => {
             return ELIGIBLE_TOKENS.indexOf(token) === -1 ? token : data.splice(0, 1).pop();
           }).join(''),
-          this.pickerFormat).toDate());
+          this.pickerFormat).toDate()
+        );
       },
     });
     picker.present();

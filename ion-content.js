@@ -6,13 +6,13 @@ xin.event(document).on('focusing', (evt) => {
   let target = evt.target;
   let content = target.querySelector('ion-content');
   if (content && !content._resized) {
-    target.style.visibility = 'hidden';
-    target.style.display = 'block';
-
-    content._resize();
-
-    target.style.display = '';
-    target.style.visibility = '';
+    content._resize(() => {
+      target.style.visibility = 'hidden';
+      target.style.display = 'block';
+    }, () => {
+      target.style.display = '';
+      target.style.visibility = '';
+    });
   }
 });
 
@@ -54,30 +54,45 @@ class IonContent extends xin.Component {
 
     if (this.scrollX || this.scrollY) {
       this.__templateModel.on('blur', evt => {
-        this.scrollTop = 0;
-        this.scrollLeft = 0;
+        xin.Async.nextFrame(() => {
+          this.scrollTop = 0;
+          this.scrollLeft = 0;
+        });
       });
     }
   }
 
-  _resize () {
-    let paddingTop = 0;
-    let paddingBottom = 0;
-
+  _resize (preCallback, postCallback) {
     let el = this;
+    let prevSiblings = [];
+    let nextSiblings = [];
+
     while ((el = el.previousElementSibling)) {
-      paddingTop += el.clientHeight;
+      prevSiblings.push(el);
     }
 
     el = this;
     while ((el = el.nextElementSibling)) {
-      paddingBottom += el.clientHeight;
+      nextSiblings.push(el);
     }
 
-    this.style.paddingTop = paddingTop + 'px';
-    this.style.paddingBottom = paddingBottom + 'px';
-
     this._resized = true;
+
+    xin.Async.nextFrame(() => {
+      if (preCallback) preCallback();
+
+      xin.Async.nextFrame(() => {
+        let paddingTop = prevSiblings.reduce((paddingTop, el) => paddingTop + el.clientHeight, 0);
+        let paddingBottom = nextSiblings.reduce((paddingBottom, el) => paddingBottom + el.clientHeight, 0);
+
+        xin.Async.nextFrame(() => {
+          this.style.paddingTop = paddingTop + 'px';
+          this.style.paddingBottom = paddingBottom + 'px';
+
+          if (postCallback) postCallback();
+        });
+      });
+    });
   }
 }
 

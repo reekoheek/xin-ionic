@@ -44,8 +44,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: /(ion-\w+\.js|node_modules\/(xin|template-binding)\/)/,
-        loader: 'babel',
+        include: /(ion-\w+\.js|\/(xin|template-binding)\/)/,
+        loader: require.resolve('babel-loader'),
         query: {
           cacheDirectory: true,
         },

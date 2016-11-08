@@ -4,7 +4,7 @@ import xin from 'xin';
 class IonInput extends xin.Component {
   get template () {
     return `
-      <input id="input" class="text-input" autocomplete="off" autocorrect="off" type="[[type]]" placeholder="" (focus)="_gotFocus(evt)" (blur)="_lostFocus(evt)" value="{{value}}">
+      <input id="input" class="text-input" autocomplete="off" autocorrect="off" type$="[[type]]" placeholder="" (focus)="_gotFocus(evt)" (blur)="_lostFocus(evt)" value="{{value}}">
       <button class="text-input-clear-icon disable-hover button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden="">
         <span class="button-inner"></span>
         <div class="button-effect"></div>

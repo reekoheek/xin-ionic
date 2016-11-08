@@ -47,11 +47,11 @@ class IonPickerCol extends xin.Component {
 
   _touchMoved (evt) {
     evt.stopImmediatePropagation();
-    this.debounce('_touchMoved', () => {
-      let y = evt.touches[0].pageY;
-      let deltaY = this.startY - y;
-      this.update(this.y - deltaY);
-    });
+    // this.debounce('_touchMoved', () => {
+    let y = evt.touches[0].pageY;
+    let deltaY = this.startY - y;
+    this.update(this.y - deltaY);
+    // });
   }
 
   _touchEnd (evt) {
@@ -80,16 +80,20 @@ class IonPickerCol extends xin.Component {
   }
 
   update (y) {
-    if (this.col && this.col.options) {
-      this.col.options.forEach((option, i) => {
-        let posY = y + (i * 41);
-        option.selected = posY >= -20 && posY <= 20;
-        option._y = posY;
-        option._trans = `rotateX(0deg) translate3d(0px, ${posY}px, 0px)`;
-      });
+    this.debounce('_update', () => {
+      if (this.col && this.col.options) {
+        this.async(() => {
+          this.col.options.forEach((option, i) => {
+            let posY = y + (i * 41);
+            option.selected = posY >= -20 && posY <= 20;
+            option._y = posY;
+            option._trans = `rotateX(0deg) translate3d(0px, ${posY}px, 0px)`;
+          });
 
-      this.$.repeater.notify('items');
-    }
+          this.$.repeater.notify('items');
+        });
+      }
+    });
   }
 }
 
@@ -108,8 +112,8 @@ class IonPicker extends xin.Component {
 
   get template () {
     return `
-      <ion-backdrop (click)="_cancelClicked(evt)" disable-activated="" role="presentation" tappable="" style="opacity: 0.26;"></ion-backdrop>
-      <div class="picker-wrapper" style="transform: translateY(0%);">
+      <ion-backdrop id="backDrop" (click)="_cancelClicked(evt)" disable-activated="" role="presentation" tappable></ion-backdrop>
+      <div class="picker-wrapper">
         <div class="picker-toolbar">
           <div class="picker-toolbar-button picker-toolbar-cancel">
             <button is="ion-button" clear class="disable-hover" (click)="_cancelClicked(evt)">Cancel</button>
@@ -155,10 +159,28 @@ class IonPicker extends xin.Component {
 
   present () {
     xin('app').appendChild(this);
+
+    this.async(() => {
+      let pickerWrapperEl = this.$$('.picker-wrapper');
+      this.$.backDrop.style.opacity = 0.6;
+      pickerWrapperEl.style.transform = 'translate3d(0, 0, 0)';
+      pickerWrapperEl.style.webkitTransform = 'translate3d(0, 0, 0)';
+    }, 1);
   }
 
   dismiss () {
-    xin('app').removeChild(this);
+    let pickerWrapperEl = this.$$('.picker-wrapper');
+
+    this.$.backDrop.style.opacity = '';
+    pickerWrapperEl.style.transform = '';
+    pickerWrapperEl.style.webkitTransform = '';
+
+    xin.event(this.$.backDrop).on('transitionend', () => {
+      xin.event(this.$.backDrop).off('transitionend');
+      this.async(() => {
+        xin('app').removeChild(this);
+      });
+    });
   }
 
   _cancelClicked (evt) {
