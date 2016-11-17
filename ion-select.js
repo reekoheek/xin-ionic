@@ -1,5 +1,4 @@
 import xin from 'xin';
-import IonAlert from './ion-alert';
 
 function clone (orig) {
   try {
@@ -89,7 +88,7 @@ class IonSelect extends xin.Component {
     return input ? input.label : '';
   }
 
-  _selectClicked (evt) {
+  async _selectClicked (evt) {
     evt.stopImmediatePropagation();
 
     let inputs = clone(this.inputs).map(input => {
@@ -101,24 +100,26 @@ class IonSelect extends xin.Component {
       return input;
     });
 
-    let alert = IonAlert.create({
-      title: this.label,
-      inputs: inputs,
-      buttons: [
-        {
-          text: 'Cancel',
-        },
-        {
-          text: 'OK',
-          handler: data => {
-            this.set('value', data);
-            this.set('inputs', inputs);
+    return System.import('./ion-alert').then(IonAlert => {
+      let alert = IonAlert.create({
+        title: this.label,
+        inputs: inputs,
+        buttons: [
+          {
+            text: 'Cancel',
           },
-        },
-      ],
-    });
+          {
+            text: 'OK',
+            handler: data => {
+              this.set('value', data);
+              this.set('inputs', inputs);
+            },
+          },
+        ],
+      });
 
-    alert.present();
+      alert.present();
+    });
   }
 }
 

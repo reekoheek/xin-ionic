@@ -19,9 +19,7 @@ class IonSlides extends xin.Component {
   }
 
   attached () {
-    this.async(() => {
-      this.swiper = new Swiper(this.$$('.swiper-container'));
-    }, 1);
+    this.async(() => (this.swiper = new Swiper(this.$$('.swiper-container'))), 1);
   }
 }
 
