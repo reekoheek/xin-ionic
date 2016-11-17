@@ -37,7 +37,8 @@
     "webpack": "2.1.0-beta.27"
   },
   "dependencies": {
-    "xin": "xinix-technology/xin#next",
-    "moment": "^2.15.1"
+    "moment": "^2.15.1",
+    "swiper": "^3.4.0",
+    "xin": "xinix-technology/xin#next"
   }
 }

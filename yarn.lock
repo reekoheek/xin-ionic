@@ -3421,6 +3421,10 @@ swap-case@^1.1.0:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
 
+swiper:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-3.4.0.tgz#a3ada344ab36fdcbc2369223585393269a39c8c5"
+
 table@^3.7.8:
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/table/-/table-3.8.3.tgz#2bbc542f0fda9861a755d3947fefd8b3f513855f"
