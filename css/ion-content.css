@@ -1,9 +1,4 @@
-/*.xin-view.xin-view--visible {
-  display: flex;
-  flex-direction: column;
-}*/
-
-/*.menu-inner > slot > ion-content,
-.xin-view > ion-content {
-  flex: 1;
-}*/
+.content-resizing {
+  visibility: hidden!important;
+  display: block!important;
+}

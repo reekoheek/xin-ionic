@@ -2,22 +2,22 @@ const webpack = require('webpack');
 const path = require('path');
 
 const ENV = process.env.NODE_ENV || 'development';
-const ANALYZE = process.env.ANALYZE || false;
 
-console.info(`
+console.error(`
   ENV ${ENV}
-  ANALYZE ${ANALYZE}
 `);
 
 function getPlugins () {
   let plugins = [
-    new webpack.optimize.CommonsChunkPlugin('xin', ENV === 'production' ? 'xin.min.js' : 'xin.js'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'xin',
+      filename: ENV === 'production' ? 'xin.min.js' : 'xin.js',
+    }),
   ];
 
   if (ENV === 'production') {
     plugins.push(
-      new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
-      new webpack.optimize.DedupePlugin()
+      new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
     );
   }
 
@@ -40,13 +40,17 @@ module.exports = {
       {
         test: /\.css$/,
         include: /\/(css|node_modules\/xin)\//,
-        loader: 'style!css',
+        loader: [
+          require.resolve('style-loader'),
+          require.resolve('css-loader'),
+        ],
       },
       {
         test: /\.js$/,
         include: /(ion-\w+\.js|\/(xin|template-binding)\/)/,
         loader: require.resolve('babel-loader'),
         query: {
+          presets: ['es2015', 'stage-3'],
           cacheDirectory: true,
         },
       },

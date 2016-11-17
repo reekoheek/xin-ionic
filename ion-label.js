@@ -5,6 +5,7 @@ class IonLabel extends xin.Component {
     return {
       color: {
         type: String,
+        value: 'primary',
       },
 
       floating: {
@@ -22,9 +23,15 @@ class IonLabel extends xin.Component {
       this.classList.add(`label-${mode}-${this.color}`);
     }
 
-    let parentEl = this.parentElement.parentElement.parentElement.parentElement;
-    if (this.floating) {
-      parentEl.classList.add(`item-label-floating`);
+    let parentEl = this;
+    do {
+      parentEl = parentEl.parentElement;
+    } while (parentEl && parentEl.nodeName !== 'ION-ITEM');
+
+    if (parentEl) {
+      if (this.floating) {
+        parentEl.classList.add(`item-label-floating`);
+      }
     }
   }
 }

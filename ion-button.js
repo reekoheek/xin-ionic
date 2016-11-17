@@ -87,7 +87,12 @@ class IonButton extends xin.Component {
     }
 
     if (this.menutoggle) {
-      this.__app.menu.open();
+      if (!this.__app.hasMenu || !this.__app.hasMenu()) {
+        console.warn('App is not ion-app or does not have menu.');
+        return;
+      }
+
+      this.__app.openMenu();
       return;
     }
 

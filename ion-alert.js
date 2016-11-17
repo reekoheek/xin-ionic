@@ -1,5 +1,7 @@
 import xin from 'xin';
 
+import 'xin/components/repeat';
+
 const DEFAULT_HANDLER = () => ({});
 
 let element;
@@ -10,15 +12,13 @@ class IonAlert extends xin.Component {
       element = document.createElement('ion-alert');
     }
 
-    options = options || {};
-
-    options.title = options.title || '';
-    options.subtitle = options.subtitle || '';
-    if (typeof options.enableBackdropDismiss === 'undefined') {
-      options.enableBackdropDismiss = true;
-    }
-
-    element.all(options);
+    element.all(Object.assign({
+      title: '',
+      subtitle: '',
+      inputs: [],
+      enableBackdropDismiss: true,
+      buttons: [],
+    }, options));
 
     return element;
   }

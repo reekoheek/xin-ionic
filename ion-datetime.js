@@ -48,12 +48,12 @@ class IonDateTime extends xin.Component {
 
       min: {
         type: String,
-        value: () => NOW.getFullYear() - 100,
+        value: () => NOW.getFullYear() - 50,
       },
 
       max: {
         type: String,
-        value: () => NOW.getFullYear() + 100,
+        value: () => NOW.getFullYear() + 50,
       },
     };
   }
@@ -152,11 +152,19 @@ class IonDateTime extends xin.Component {
           unparsedTokens.push(token);
       }
 
+      let nowToken = now.format(token);
       let options = xin.object.v(column.options);
       let selected = options.find(c => {
-        return c.label === now.format(token);
+        return c.label === nowToken;
       });
-      if (selected) {
+
+      if (selected === null || selected === undefined) {
+        selected = (Math.abs(options[0].value - nowToken) < Math.abs(options[options.length - 1].value - nowToken))
+          ? options[0]
+          : options[options.length - 1];
+      }
+
+      if (selected !== null && selected !== undefined) {
         column.selectedIndex = options.indexOf(selected);
       }
     });

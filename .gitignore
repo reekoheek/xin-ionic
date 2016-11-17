@@ -1,3 +1,4 @@
-node_modules
 
-old
+# dev files
+/node_modules
+/old

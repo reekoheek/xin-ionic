@@ -1,4 +1,5 @@
 import xin from 'xin';
+import './css/ion-item.css';
 
 class IonItem extends xin.Component {
   get template () {
@@ -41,9 +42,14 @@ class IonItem extends xin.Component {
     }
   }
 
-  _clicked (evt) {
+  async _clicked (evt) {
     evt.stopImmediatePropagation();
-    this.__app.menu.close().then(() => (window.location.href = this.href));
+
+    if (this.__app.hasMenu && this.__app.hasMenu()) {
+      await this.__app.closeMenu();
+    }
+
+    window.location.href = this.href;
   }
 }
 

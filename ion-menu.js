@@ -1,5 +1,7 @@
 import xin from 'xin';
 
+import './css/ion-menu.css';
+
 class IonMenu extends xin.Component {
   get props () {
     return {
@@ -13,30 +15,16 @@ class IonMenu extends xin.Component {
 
   get template () {
     return `
-      <style>
-      ion-menu ion-backdrop {
-        transition: opacity .3s;
-        will-change: opacity;
-      }
-
-      ion-menu .menu-inner {
-        transition: transform .3s;
-        -webkit-transform: translateX(-100%);
-        transform: translateX(-100%);
-        will-change: transform, -webkit-transform;
-      }
-      </style>
       <div class="menu-inner"><slot></slot></div>
       <ion-backdrop (click)="close" role="presentation" class="show-backdrop"></ion-backdrop>
     `;
   }
 
-  _typeChanged (type) {
-    this.setAttribute('type', type);
-  }
-
   attached () {
-    this.__app.menu = this;
+    super.attached();
+
+    this._attached = true;
+    this.fire('-menu-attached');
   }
 
   open () {
@@ -56,16 +44,15 @@ class IonMenu extends xin.Component {
 
       this.isOpened = false;
 
-      let onTransitionEnd = () => {
-        this.off('transitionend', '.menu-inner', onTransitionEnd);
+      this.once('transitionend', '.menu-inner', () => {
         this.async(() => {
           this.classList.remove('show-menu');
           resolve();
         });
-      };
-      this.on('transitionend', '.menu-inner', onTransitionEnd);
+      });
+
       this.$$('.menu-inner').style.transform = '';
-      this.$$('ion-backdrop').style.opacity = '0';
+      this.$$('ion-backdrop').style.opacity = '0.0';
     });
   }
 
@@ -75,6 +62,10 @@ class IonMenu extends xin.Component {
     } else {
       this.open();
     }
+  }
+
+  _typeChanged (type) {
+    this.setAttribute('type', type);
   }
 }
 

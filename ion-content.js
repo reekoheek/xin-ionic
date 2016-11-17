@@ -1,17 +1,13 @@
 import xin from 'xin';
 
-import './css/ion-content.css';
-
 xin.event(document).on('focusing', (evt) => {
   let target = evt.target;
   let content = target.querySelector('ion-content');
   if (content && !content._resized) {
     content._resize(() => {
-      target.style.visibility = 'hidden';
-      target.style.display = 'block';
+      target.classList.add('content-resizing');
     }, () => {
-      target.style.display = '';
-      target.style.visibility = '';
+      target.classList.remove('content-resizing');
     });
   }
 });

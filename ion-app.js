@@ -1,10 +1,11 @@
 import xin from 'xin';
 import App from 'xin/components/app';
-import _ from 'lodash';
+
+import './ion-menu';
 
 class IonApp extends App {
   get props () {
-    return _.defaults({
+    return Object.assign({}, super.props, {
       platform: {
         type: String,
         value: 'android',
@@ -13,25 +14,49 @@ class IonApp extends App {
         type: String,
         computed: '_computePlatformMode(platform)',
       },
-    }, super.props);
+    });
   }
 
   get listeners () {
-    return _.defaults({
+    return Object.assign({}, super.listeners, {
       'backbutton': '_backButtonTapped',
-    }, super.listeners);
+    });
   }
 
-  created () {
-    super.created();
-
-    this.style.height = `${window.innerHeight}px`;
-  }
+  // created () {
+  //   super.created();
+  //
+  //   this.style.height = `${window.innerHeight}px`;
+  // }
 
   ready () {
     super.ready();
 
     this.classList.add(this.platformMode);
+  }
+
+  hasMenu () {
+    if ('_menu$' in this === false) {
+      this._menu$ = this.getElementsByTagName('ion-menu')[0];
+    }
+
+    return this._menu$;
+  }
+
+  async openMenu () {
+    if (!this.hasMenu()) {
+      return;
+    }
+
+    this._menu$.open();
+  }
+
+  async closeMenu () {
+    if (!this.hasMenu()) {
+      return;
+    }
+
+    this._menu$.close();
   }
 
   _computePlatformMode (platform) {

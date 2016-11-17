@@ -1,4 +1,5 @@
 import xin from 'xin';
+import 'xin/components/repeat';
 
 let element;
 

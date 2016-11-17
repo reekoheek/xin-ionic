@@ -63,8 +63,14 @@ class IonSelect extends xin.Component {
 
     this.classList.add(`select-${mode}`);
 
-    let parentEl = this.parentElement.parentElement.parentElement.parentElement;
-    parentEl.classList.add(`item-select`);
+    let parentEl = this;
+    do {
+      parentEl = parentEl.parentElement;
+    } while (parentEl && parentEl.nodeName !== 'ION-ITEM');
+
+    if (parentEl) {
+      parentEl.classList.add(`item-select`);
+    }
   }
 
   _computeText (value) {
