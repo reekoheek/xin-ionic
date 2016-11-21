@@ -1,5 +1,6 @@
 import xin from 'xin';
 import IonPicker from './ion-picker';
+
 import moment from 'moment';
 
 const FORMATTING_TOKENS = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g; // eslint-disable-line no-useless-escape
@@ -179,7 +180,7 @@ class IonDateTime extends xin.Component {
     let columns = this._getPickerColumns(this.value);
     let picker = IonPicker.create({
       columns: columns,
-      onDone: (data) => {
+      onDone: data => {
         this.set(
           'value',
           moment(this.pickerFormat.match(FORMATTING_TOKENS).map((token, index) => {
@@ -194,5 +195,3 @@ class IonDateTime extends xin.Component {
 }
 
 xin.define('ion-datetime', IonDateTime);
-
-export default IonDateTime;
