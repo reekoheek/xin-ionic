@@ -100,7 +100,8 @@ class IonSelect extends xin.Component {
       return input;
     });
 
-    return System.import('./ion-alert').then(IonAlert => {
+    return System.import('./ion-alert').then(module => {
+      const IonAlert = module.default;
       let alert = IonAlert.create({
         title: this.label,
         inputs: inputs,
