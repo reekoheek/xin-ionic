@@ -1,7 +1,14 @@
 import xin from 'xin';
-import Swiper from 'swiper';
 
 class IonSlides extends xin.Component {
+  get props () {
+    return Object.assign({}, super.props, {
+      options: {
+        type: Object,
+      },
+    });
+  }
+
   get template () {
     return `
     <div class="swiper-container swiper-container-horizontal">
@@ -19,7 +26,11 @@ class IonSlides extends xin.Component {
   }
 
   attached () {
-    this.async(() => (this.swiper = new Swiper(this.$$('.swiper-container'))), 1);
+    this.async(() => {
+      System.import('swiper').then(Swiper => {
+        this.swiper = new Swiper(this.$$('.swiper-container'), this.options);
+      });
+    }, 1);
   }
 }
 
