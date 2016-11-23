@@ -43,7 +43,7 @@ class IonItem extends xin.Component {
   }
 
   async _clicked (evt) {
-    evt.stopImmediatePropagation();
+    // evt.stopImmediatePropagation();
 
     if (this.__app.hasMenu && this.__app.hasMenu()) {
       await this.__app.closeMenu();
