@@ -15,6 +15,7 @@ class IonAlert extends xin.Component {
     element.all(Object.assign({
       title: '',
       subtitle: '',
+      message: '',
       inputs: [],
       enableBackdropDismiss: true,
       buttons: [],
