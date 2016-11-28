@@ -34,11 +34,16 @@ class IonSelect extends xin.Component {
         value: () => ({}),
         notify: true,
       },
+
+      inputs: {
+        type: Array,
+        value: () => ([]),
+      },
     };
   }
 
   created () {
-    this.inputs = [];
+    // this.inputs = [];
     [].forEach.call(this.children, node => {
       if (node.nodeType === window.Node.ELEMENT_NODE && node.matches('ion-option')) {
         let label = node.textContent;
@@ -96,6 +101,9 @@ class IonSelect extends xin.Component {
         input.checked = this.value ? (this.value.indexOf(input.value) !== -1) : false;
       } else {
         input.checked = this.value === input.value;
+      }
+      if (!input.type) {
+        input.type = this.multiple ? 'checkbox' : 'radio';
       }
       return input;
     });
