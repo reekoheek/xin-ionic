@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const UglifyJsPlugin = require('./dev/webpack/UglifyJsPlugin');
+
 const ENV = process.env.NODE_ENV || 'development';
 
 console.error(`
@@ -17,7 +19,7 @@ function getPlugins () {
 
   if (ENV === 'production') {
     plugins.push(
-      new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
+      new UglifyJsPlugin({ compress: { warnings: false } })
     );
   }
 
@@ -50,7 +52,11 @@ module.exports = {
         include: /(ion-\w+\.js|\/(xin|template-binding)\/)/,
         loader: require.resolve('babel-loader'),
         query: {
-          presets: ['es2015', 'stage-3'],
+          plugins: [
+            // require.resolve('babel-plugin-transform-es2015-modules-commonjs'),
+            require.resolve('babel-plugin-transform-async-to-generator'),
+          ],
+          // presets: ['es2015', 'stage-3'],
           cacheDirectory: true,
         },
       },

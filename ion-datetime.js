@@ -34,6 +34,7 @@ class IonDateTime extends xin.Component {
 
       valueText: {
         type: String,
+        value: '',
         computed: '_computeValueText(value)',
       },
 

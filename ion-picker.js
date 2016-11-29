@@ -176,8 +176,7 @@ class IonPicker extends xin.Component {
     pickerWrapperEl.style.transform = '';
     pickerWrapperEl.style.webkitTransform = '';
 
-    xin.event(this.$.backDrop).on('transitionend', () => {
-      xin.event(this.$.backDrop).off('transitionend');
+    this.once('transitionend', this.$.backDrop, () => {
       this.async(() => {
         xin('app').removeChild(this);
       });
