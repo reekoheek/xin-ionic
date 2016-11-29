@@ -1,637 +1,39 @@
 webpackJsonp([0],{
 
-/***/ 11:
+/***/ 18:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _xin = __webpack_require__(0);
-
-var _xin2 = _interopRequireDefault(_xin);
-
-__webpack_require__(26);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var IonMenu = function (_xin$Component) {
-  _inherits(IonMenu, _xin$Component);
-
-  function IonMenu() {
-    _classCallCheck(this, IonMenu);
-
-    return _possibleConstructorReturn(this, (IonMenu.__proto__ || Object.getPrototypeOf(IonMenu)).apply(this, arguments));
-  }
-
-  _createClass(IonMenu, [{
-    key: 'attached',
-    value: function attached() {
-      _get(IonMenu.prototype.__proto__ || Object.getPrototypeOf(IonMenu.prototype), 'attached', this).call(this);
-
-      this._attached = true;
-      this.fire('-menu-attached');
-    }
-  }, {
-    key: 'open',
-    value: function open() {
-      var _this2 = this;
-
-      this.isOpened = true;
-      this.classList.add('show-menu');
-      this.async(function () {
-        _this2.$$('.menu-inner').style.transform = 'translateX(0)';
-        _this2.$$('ion-backdrop').style.opacity = '0.6';
-      }, 1);
-    }
-  }, {
-    key: 'close',
-    value: function close() {
-      var _this3 = this;
-
-      return new Promise(function (resolve, reject) {
-        if (!_this3.isOpened) {
-          return resolve();
-        }
-
-        _this3.isOpened = false;
-
-        _this3.once('transitionend', '.menu-inner', function () {
-          _this3.async(function () {
-            _this3.classList.remove('show-menu');
-            resolve();
-          });
-        });
-
-        _this3.$$('.menu-inner').style.transform = '';
-        _this3.$$('ion-backdrop').style.opacity = '0.0';
-      });
-    }
-  }, {
-    key: 'toggle',
-    value: function toggle() {
-      if (this.isOpened) {
-        this.close();
-      } else {
-        this.open();
-      }
-    }
-  }, {
-    key: '_typeChanged',
-    value: function _typeChanged(type) {
-      this.setAttribute('type', type);
-    }
-  }, {
-    key: 'props',
-    get: function get() {
-      return {
-        type: {
-          type: String,
-          value: 'overlay',
-          observer: '_typeChanged'
-        }
-      };
-    }
-  }, {
-    key: 'template',
-    get: function get() {
-      return '\n      <div class="menu-inner"><slot></slot></div>\n      <ion-backdrop (click)="close" role="presentation" class="show-backdrop"></ion-backdrop>\n    ';
-    }
-  }]);
-
-  return IonMenu;
-}(_xin2.default.Component);
-
-_xin2.default.define('ion-menu', IonMenu);
-
-exports.default = IonMenu;
-
-/***/ },
-
-/***/ 12:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _src = __webpack_require__(0);
-
-var _src2 = _interopRequireDefault(_src);
-
-var _route2 = __webpack_require__(20);
-
-var _route3 = _interopRequireDefault(_route2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// const NOOP = () => {};
-
-var App = function (_xin$Component) {
-  _inherits(App, _xin$Component);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-  }
-
-  _createClass(App, [{
-    key: 'notFound',
-    value: function notFound(fragment) {
-      console.warn('Route not found: ' + fragment);
-    }
-  }, {
-    key: '_titleChanged',
-    value: function _titleChanged(title) {
-      document.title = title;
-    }
-  }, {
-    key: 'created',
-    value: function created() {
-      _src2.default.put('app', this);
-
-      // this.classList.add('xin-app');
-
-      this.__appSignature = true;
-      this.location = window.location;
-      this.history = window.history;
-
-      // default values
-      this.handlers = [];
-      this.middlewares = [];
-
-      // this.__awaitRouteCallback = NOOP;
-      this.__started = false;
-      this.__starting = false;
-    }
-  }, {
-    key: 'attached',
-    value: function attached() {
-      var _this2 = this;
-
-      if (!this.manual) {
-        this.async(function () {
-          // this.__availableUris = [].map.call(this.querySelectorAll('.xin-view'), el => el.uri);
-          _this2.start();
-        });
-      }
-    }
-  }, {
-    key: 'route',
-    value: function route(_route, callback) {
-      this.handlers.push(new _route3.default(_route, callback));
-      // this.__awaitRouteCallback(this.getFragmentExecutors(this.getFragment()));
-    }
-  }, {
-    key: 'start',
-    value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var executed;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(this.__started || this.__starting)) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt('return');
-
-              case 2:
-
-                this.__middlewareChainRun = compose(this.middlewares);
-
-                this.__listenNavigation();
-
-                console.info('Starting ' + this.is + ':' + this.__id + ' ...');
-
-                this.__starting = true;
-                _context.next = 8;
-                return this.__execute();
-
-              case 8:
-                executed = _context.sent;
-
-                this.__starting = false;
-
-                if (executed) {
-                  console.info('Started ' + this.is + ':' + this.__id);
-
-                  this.__started = true;
-
-                  this.fire('started');
-                }
-
-              case 11:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function start() {
-        return _ref.apply(this, arguments);
-      }
-
-      return start;
-    }()
-  }, {
-    key: '__listenNavigation',
-    value: function __listenNavigation() {
-      var _this3 = this;
-
-      var callback = function callback() {
-        _this3.__execute();
-      };
-
-      if (this.mode === 'history') {
-        _src2.default.event(window).on('popstate', callback);
-        _src2.default.event(document).on('click', function (evt) {
-          if (!evt.defaultPrevented && evt.target.nodeName === 'A' && evt.target.target === '') {
-            evt.preventDefault();
-
-            var state = { url: evt.target.getAttribute('href') };
-            _this3.history.pushState(state, evt.target.innerHTML, evt.target.href);
-
-            callback();
-          }
-        });
-      } else {
-        _src2.default.event(window).on('hashchange', callback);
-      }
-    }
-  }, {
-    key: 'getFragmentExecutors',
-    value: function getFragmentExecutors(fragment) {
-      return this.handlers.reduce(function (executors, handler) {
-        var executor = handler.getExecutorFor(fragment);
-        if (executor) executors.push(executor);
-        return executors;
-      }, []);
+class Route {
+  static routeRegExp(str) {
+    let chunks = str.split('[');
+
+    if (chunks.length > 2) {
+      throw new Error('Invalid use of optional params');
     }
 
-    // __waitForRoute () {
-    //   return new Promise((resolve, reject) => {
-    //     this.__awaitRouteCallback = (executors) => {
-    //       if (executors.length === 0) {
-    //         return;
-    //       }
-    //
-    //       this.__awaitRouteCallback = NOOP;
-    //       resolve(executors);
-    //     };
-    //   });
-    // }
+    let tokens = [];
+    let re = chunks[0].replace(/{([^}]+)}/g, function (g, token) {
+      tokens.push(token);
+      return '([^/]+)';
+    }).replace(/\//g, '\\/');
 
-  }, {
-    key: '__execute',
-    value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-        var _this4 = this;
+    let optRe = '';
 
-        var fragment, context, willContinue;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                fragment = this.getFragment();
-                context = { app: this, uri: fragment };
-
-                // run middleware chain then execute all executors
-
-                _context2.next = 4;
-                return this.__middlewareChainRun(context, function () {
-                  var executors = _this4.getFragmentExecutors(context.uri);
-                  if (executors.length === 0) {
-                    _this4.notFound(fragment);
-                    _this4.fire('route-not-found', fragment);
-                    return;
-                    // if (this.__availableUris.indexOf(fragment) === -1) {
-                    // }
-                    // executors = await this.__waitForRoute();
-                  }
-
-                  executors.forEach(function (executor) {
-                    executor.handler.callback(executor.args, context);
-                  });
-                });
-
-              case 4:
-                willContinue = _context2.sent;
-
-                if (!(willContinue === false)) {
-                  _context2.next = 7;
-                  break;
-                }
-
-                return _context2.abrupt('return', false);
-
-              case 7:
-
-                this.fire('navigated', context);
-                return _context2.abrupt('return', true);
-
-              case 9:
-              case 'end':
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function __execute() {
-        return _ref2.apply(this, arguments);
-      }
-
-      return __execute;
-    }()
-  }, {
-    key: 'navigate',
-    value: function navigate(path, options) {
-      path = path || '/';
-      options = options || {};
-
-      if (this.mode === 'history') {
-        var url = this.rootUri + path.toString().replace(/\/$/, '').replace(/^\//, '');
-        if (this.location.href.replace(this.location.origin, '') !== url) {
-          this.history[options.replace ? 'replaceState' : 'pushState']({}, document.title, url);
-          this.__execute();
-        }
-      } else {
-        this.location.href.match(this.hashSeparator);
-        this.location.href = this.location.href.replace(this.hashSeparator, '') + this.hashSeparator + path;
-      }
-      return this;
-    }
-  }, {
-    key: 'use',
-    value: function use(middleware) {
-      this.middlewares.push(middleware);
-    }
-  }, {
-    key: 'getFragment',
-    value: function getFragment() {
-      try {
-        var fragment = void 0;
-        if (this.mode === 'history') {
-          fragment = decodeURI(this.location.pathname + this.location.search);
-          fragment = fragment.replace(/\?(.*)$/, '');
-          fragment = this.rootUri === '/' ? fragment : fragment.replace(this.rootUri, '');
-        } else {
-          var match = this.location.href.match(this.hashSeparator);
-          fragment = match ? match[1] : '';
-        }
-
-        return '/' + fragment.toString().replace(/\/$/, '').replace(/^\//, '');
-      } catch (err) {
-        console.error('Fragment is not match any pattern, fallback to /');
-        return '/';
-      }
-    }
-
-    // $back (evt) {
-    //   evt.preventDefault();
-    //   this.history.back();
-    // }
-
-  }, {
-    key: 'props',
-    get: function get() {
-      return {
-        docTitle: {
-          type: String,
-          value: 'Application',
-          observer: '_titleChanged'
-        },
-
-        manual: {
-          type: Boolean
-        },
-
-        mode: {
-          type: String,
-          value: 'hash'
-        },
-
-        rootUri: {
-          type: String,
-          value: '/'
-        },
-
-        hashSeparator: {
-          type: RegExp,
-          value: function value() {
-            return (/#!(.*)$/
-            );
-          }
-        }
-      };
-    }
-  }, {
-    key: 'started',
-    get: function get() {
-      return this.__started || false;
-    }
-  }]);
-
-  return App;
-}(_src2.default.Component);
-
-_src2.default.define('xin-app', App);
-
-function compose(middlewares) {
-  var _this5 = this;
-
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = middlewares[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var fn = _step.value;
-
-      if (typeof fn !== 'function') {
-        throw new TypeError('Middleware must be composed of functions!');
-      }
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  return function () {
-    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(context, next) {
-      var dispatch = function () {
-        var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(i) {
-          var fn;
-          return regeneratorRuntime.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  if (!(i <= index)) {
-                    _context3.next = 2;
-                    break;
-                  }
-
-                  throw new Error('next() called multiple times');
-
-                case 2:
-
-                  index = i;
-                  fn = middlewares[i];
-
-                  if (i === middlewares.length) {
-                    fn = next;
-                  }
-
-                  if (fn) {
-                    _context3.next = 7;
-                    break;
-                  }
-
-                  return _context3.abrupt('return');
-
-                case 7:
-                  _context3.next = 9;
-                  return fn(context, function () {
-                    return dispatch(i + 1);
-                  });
-
-                case 9:
-                  return _context3.abrupt('return', _context3.sent);
-
-                case 10:
-                case 'end':
-                  return _context3.stop();
-              }
-            }
-          }, _callee3, this);
-        }));
-
-        return function dispatch(_x3) {
-          return _ref4.apply(this, arguments);
-        };
-      }();
-
-      var index;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              // last called middlewares #
-              index = -1;
-              return _context4.abrupt('return', dispatch(0));
-
-            case 2:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, _this5);
-    }));
-
-    return function (_x, _x2) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-}
-
-// xin.App = App;
-exports.default = App;
-
-/***/ },
-
-/***/ 20:
-/***/ function(module, exports) {
-
-"use strict";
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Route = function () {
-  _createClass(Route, null, [{
-    key: 'routeRegExp',
-    value: function routeRegExp(str) {
-      var chunks = str.split('[');
-
-      if (chunks.length > 2) {
-        throw new Error('Invalid use of optional params');
-      }
-
-      var tokens = [];
-      var re = chunks[0].replace(/{([^}]+)}/g, function (g, token) {
+    if (chunks[1]) {
+      optRe = '(?:' + chunks[1].slice(0, -1).replace(/{([^}]+)}/g, function (g, token) {
         tokens.push(token);
         return '([^/]+)';
-      }).replace(/\//g, '\\/');
-
-      var optRe = '';
-
-      if (chunks[1]) {
-        optRe = '(?:' + chunks[1].slice(0, -1).replace(/{([^}]+)}/g, function (g, token) {
-          tokens.push(token);
-          return '([^/]+)';
-        }).replace(/\//g, '\\/') + ')?';
-      }
-      return [new RegExp('^' + re + optRe + '$'), tokens];
+      }).replace(/\//g, '\\/') + ')?';
     }
-  }, {
-    key: 'isStatic',
-    value: function isStatic(pattern) {
-      return !pattern.match(/[[{]/);
-    }
-  }]);
+    return [new RegExp('^' + re + optRe + '$'), tokens];
+  }
 
-  function Route(route, callback) {
-    _classCallCheck(this, Route);
+  static isStatic(pattern) {
+    return !pattern.match(/[[{]/);
+  }
 
+  constructor(route, callback) {
     this.route = route;
     this.callback = callback;
 
@@ -640,54 +42,51 @@ var Route = function () {
       this.pattern = null;
       this.args = [];
     } else {
-      var result = Route.routeRegExp(route);
+      let result = Route.routeRegExp(route);
       this.type = 'v';
       this.pattern = result[0];
       this.args = result[1];
     }
   }
 
-  _createClass(Route, [{
-    key: 'getExecutorFor',
-    value: function getExecutorFor(fragment) {
-      var _this = this;
-
-      if (this.type === 's') {
-        if (fragment === this.route) {
-          return { handler: this, args: {} };
-        }
-      } else if (this.type === 'v') {
-        var _ret = function () {
-          var result = fragment.match(_this.pattern);
-          if (result) {
-            return {
-              v: {
-                handler: _this,
-                args: _this.args.reduce(function (args, name, index) {
-                  args[name] = result[index + 1];
-                  return args;
-                }, {})
-              }
-            };
-          }
-        }();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+  getExecutorFor(fragment) {
+    if (this.type === 's') {
+      if (fragment === this.route) {
+        return { handler: this, args: {} };
+      }
+    } else if (this.type === 'v') {
+      let result = fragment.match(this.pattern);
+      if (result) {
+        return {
+          handler: this,
+          args: this.args.reduce((args, name, index) => {
+            args[name] = result[index + 1];
+            return args;
+          }, {})
+        };
       }
     }
-  }]);
+  }
+}
 
-  return Route;
-}();
-
-exports.default = Route;
+/* harmony default export */ exports["a"] = Route;
 
 /***/ },
 
-/***/ 24:
+/***/ 19:
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)();
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_event_helper__ = __webpack_require__(2);
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_0_event_helper__["a"]; });
+
+
+/***/ },
+
+/***/ 21:
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(22)();
 // imports
 
 
@@ -699,16 +98,326 @@ exports.push([module.i, "ion-menu ion-backdrop {\n  transition: opacity .3s;\n  
 
 /***/ },
 
-/***/ 26:
+/***/ 22:
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ },
+
+/***/ 32:
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+var stylesInDom = {},
+	memoize = function(fn) {
+		var memo;
+		return function () {
+			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+			return memo;
+		};
+	},
+	isOldIE = memoize(function() {
+		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+	}),
+	getHeadElement = memoize(function () {
+		return document.head || document.getElementsByTagName("head")[0];
+	}),
+	singletonElement = null,
+	singletonCounter = 0,
+	styleElementsInsertedAtTop = [];
+
+module.exports = function(list, options) {
+	if(typeof DEBUG !== "undefined" && DEBUG) {
+		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the bottom of <head>.
+	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+	var styles = listToStyles(list);
+	addStylesToDom(styles, options);
+
+	return function update(newList) {
+		var mayRemove = [];
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+		if(newList) {
+			var newStyles = listToStyles(newList);
+			addStylesToDom(newStyles, options);
+		}
+		for(var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+			if(domStyle.refs === 0) {
+				for(var j = 0; j < domStyle.parts.length; j++)
+					domStyle.parts[j]();
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+}
+
+function addStylesToDom(styles, options) {
+	for(var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+		if(domStyle) {
+			domStyle.refs++;
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles(list) {
+	var styles = [];
+	var newStyles = {};
+	for(var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+		if(!newStyles[id])
+			styles.push(newStyles[id] = {id: id, parts: [part]});
+		else
+			newStyles[id].parts.push(part);
+	}
+	return styles;
+}
+
+function insertStyleElement(options, styleElement) {
+	var head = getHeadElement();
+	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+	if (options.insertAt === "top") {
+		if(!lastStyleElementInsertedAtTop) {
+			head.insertBefore(styleElement, head.firstChild);
+		} else if(lastStyleElementInsertedAtTop.nextSibling) {
+			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			head.appendChild(styleElement);
+		}
+		styleElementsInsertedAtTop.push(styleElement);
+	} else if (options.insertAt === "bottom") {
+		head.appendChild(styleElement);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement(styleElement) {
+	styleElement.parentNode.removeChild(styleElement);
+	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+	if(idx >= 0) {
+		styleElementsInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement(options) {
+	var styleElement = document.createElement("style");
+	styleElement.type = "text/css";
+	insertStyleElement(options, styleElement);
+	return styleElement;
+}
+
+function createLinkElement(options) {
+	var linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	insertStyleElement(options, linkElement);
+	return linkElement;
+}
+
+function addStyle(obj, options) {
+	var styleElement, update, remove;
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+		styleElement = singletonElement || (singletonElement = createStyleElement(options));
+		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+	} else if(obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function") {
+		styleElement = createLinkElement(options);
+		update = updateLink.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+			if(styleElement.href)
+				URL.revokeObjectURL(styleElement.href);
+		};
+	} else {
+		styleElement = createStyleElement(options);
+		update = applyToTag.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle(newObj) {
+		if(newObj) {
+			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+				return;
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag(styleElement, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = styleElement.childNodes;
+		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+		if (childNodes.length) {
+			styleElement.insertBefore(cssNode, childNodes[index]);
+		} else {
+			styleElement.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag(styleElement, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		styleElement.setAttribute("media", media)
+	}
+
+	if(styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = css;
+	} else {
+		while(styleElement.firstChild) {
+			styleElement.removeChild(styleElement.firstChild);
+		}
+		styleElement.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink(linkElement, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	if(sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = linkElement.href;
+
+	linkElement.href = URL.createObjectURL(blob);
+
+	if(oldSrc)
+		URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ },
+
+/***/ 33:
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(24);
+var content = __webpack_require__(21);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(10)(content, {});
+var update = __webpack_require__(32)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -726,180 +435,459 @@ if(false) {
 
 /***/ },
 
-/***/ 28:
+/***/ 34:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _xin = __webpack_require__(0);
-
-var _xin2 = _interopRequireDefault(_xin);
-
-var _app = __webpack_require__(12);
-
-var _app2 = _interopRequireDefault(_app);
-
-__webpack_require__(11);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_xin__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_xin_components_app__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ion_menu__ = __webpack_require__(8);
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IonApp = function (_App) {
-  _inherits(IonApp, _App);
 
-  function IonApp() {
-    _classCallCheck(this, IonApp);
 
-    return _possibleConstructorReturn(this, (IonApp.__proto__ || Object.getPrototypeOf(IonApp)).apply(this, arguments));
+class IonApp extends __WEBPACK_IMPORTED_MODULE_1_xin_components_app__["a" /* default */] {
+  get props() {
+    return Object.assign({}, super.props, {
+      platform: {
+        type: String,
+        value: 'android'
+      },
+      platformMode: {
+        type: String,
+        computed: '_computePlatformMode(platform)'
+      }
+    });
   }
 
-  _createClass(IonApp, [{
-    key: 'ready',
+  get listeners() {
+    return Object.assign({}, super.listeners, {
+      'backbutton': '_backButtonTapped'
+    });
+  }
 
+  // created () {
+  //   super.created();
+  //
+  //   this.style.height = `${window.innerHeight}px`;
+  // }
 
-    // created () {
-    //   super.created();
-    //
-    //   this.style.height = `${window.innerHeight}px`;
-    // }
+  ready() {
+    super.ready();
 
-    value: function ready() {
-      _get(IonApp.prototype.__proto__ || Object.getPrototypeOf(IonApp.prototype), 'ready', this).call(this);
+    this.classList.add(this.platformMode);
+  }
 
-      this.classList.add(this.platformMode);
+  hasMenu() {
+    if ('_menu$' in this === false) {
+      this._menu$ = this.getElementsByTagName('ion-menu')[0];
     }
-  }, {
-    key: 'hasMenu',
-    value: function hasMenu() {
-      if ('_menu$' in this === false) {
-        this._menu$ = this.getElementsByTagName('ion-menu')[0];
+
+    return this._menu$;
+  }
+
+  openMenu() {
+    var _this = this;
+
+    return _asyncToGenerator(function* () {
+      if (!_this.hasMenu()) {
+        return;
       }
 
-      return this._menu$;
-    }
-  }, {
-    key: 'openMenu',
-    value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (this.hasMenu()) {
-                  _context.next = 2;
-                  break;
-                }
+      _this._menu$.open();
+    })();
+  }
 
-                return _context.abrupt('return');
+  closeMenu() {
+    var _this2 = this;
 
-              case 2:
-
-                this._menu$.open();
-
-              case 3:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function openMenu() {
-        return _ref.apply(this, arguments);
+    return _asyncToGenerator(function* () {
+      if (!_this2.hasMenu()) {
+        return;
       }
 
-      return openMenu;
-    }()
-  }, {
-    key: 'closeMenu',
-    value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (this.hasMenu()) {
-                  _context2.next = 2;
-                  break;
-                }
+      _this2._menu$.close();
+    })();
+  }
 
-                return _context2.abrupt('return');
+  _computePlatformMode(platform) {
+    return platform === 'android' ? 'md' : platform;
+  }
 
-              case 2:
+  _backButtonTapped() {
+    window.history.back();
+  }
+}
 
-                this._menu$.close();
+__WEBPACK_IMPORTED_MODULE_0_xin__["a" /* default */].define('ion-app', IonApp);
 
-              case 3:
-              case 'end':
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
+/* harmony default export */ exports["default"] = IonApp;
 
-      function closeMenu() {
-        return _ref2.apply(this, arguments);
+/***/ },
+
+/***/ 8:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_xin__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_ion_menu_css__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_ion_menu_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_ion_menu_css__);
+
+
+
+
+class IonMenu extends __WEBPACK_IMPORTED_MODULE_0_xin__["a" /* default */].Component {
+  get props() {
+    return {
+      type: {
+        type: String,
+        value: 'overlay',
+        observer: '_typeChanged'
+      }
+    };
+  }
+
+  get template() {
+    return `
+      <div class="menu-inner"><slot></slot></div>
+      <ion-backdrop (click)="close" role="presentation" class="show-backdrop"></ion-backdrop>
+    `;
+  }
+
+  attached() {
+    super.attached();
+
+    this._attached = true;
+    this.fire('-menu-attached');
+  }
+
+  open() {
+    this.isOpened = true;
+    this.classList.add('show-menu');
+    this.async(() => {
+      this.$$('.menu-inner').style.transform = 'translateX(0)';
+      this.$$('ion-backdrop').style.opacity = '0.6';
+    }, 1);
+  }
+
+  close() {
+    return new Promise((resolve, reject) => {
+      if (!this.isOpened) {
+        return resolve();
       }
 
-      return closeMenu;
-    }()
-  }, {
-    key: '_computePlatformMode',
-    value: function _computePlatformMode(platform) {
-      return platform === 'android' ? 'md' : platform;
+      this.isOpened = false;
+
+      this.once('transitionend', '.menu-inner', () => {
+        this.async(() => {
+          this.classList.remove('show-menu');
+          resolve();
+        }, 1);
+      });
+
+      this.$$('.menu-inner').style.transform = '';
+      this.$$('ion-backdrop').style.opacity = '0.0';
+    });
+  }
+
+  toggle() {
+    if (this.isOpened) {
+      this.close();
+    } else {
+      this.open();
     }
-  }, {
-    key: '_backButtonTapped',
-    value: function _backButtonTapped() {
-      window.history.back();
+  }
+
+  _typeChanged(type) {
+    this.setAttribute('type', type);
+  }
+}
+
+__WEBPACK_IMPORTED_MODULE_0_xin__["a" /* default */].define('ion-menu', IonMenu);
+
+/* unused harmony default export */ var _unused_webpack_default_export = IonMenu;
+
+/***/ },
+
+/***/ 9:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0____ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_route__ = __webpack_require__(18);
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+
+
+
+class App extends __WEBPACK_IMPORTED_MODULE_0____["a" /* default */].Component {
+  get props() {
+    return {
+      docTitle: {
+        type: String,
+        value: 'Application',
+        observer: '_titleChanged'
+      },
+
+      manual: {
+        type: Boolean
+      },
+
+      mode: {
+        type: String,
+        value: 'hash'
+      },
+
+      rootUri: {
+        type: String,
+        value: '/'
+      },
+
+      hash: {
+        type: String,
+        value: '#!'
+      }
+    };
+  }
+
+  get hashRegexp() {
+    if (!this._hashRegexp || this._hash !== this.hash) {
+      this._hashRegexp = new RegExp(`${ this.hash }(.*)$`);
+      this._hash = this.hash;
     }
-  }, {
-    key: 'props',
-    get: function get() {
-      return Object.assign({}, _get(IonApp.prototype.__proto__ || Object.getPrototypeOf(IonApp.prototype), 'props', this), {
-        platform: {
-          type: String,
-          value: 'android'
-        },
-        platformMode: {
-          type: String,
-          computed: '_computePlatformMode(platform)'
+
+    return this._hashRegexp;
+  }
+
+  notFound(fragment) {
+    console.warn(`Route not found: ${ fragment }`);
+  }
+
+  _titleChanged(title) {
+    document.title = title;
+  }
+
+  created() {
+    __WEBPACK_IMPORTED_MODULE_0____["a" /* default */].put('app', this);
+
+    this.__appSignature = true;
+    this.location = window.location;
+    this.history = window.history;
+
+    // default values
+    this.handlers = [];
+    this.middlewares = [];
+
+    this.__started = false;
+    this.__starting = false;
+  }
+
+  attached() {
+    if (!this.manual) {
+      this.async(() => {
+        this.start();
+      });
+    }
+  }
+
+  route(route, callback) {
+    this.handlers.push(new __WEBPACK_IMPORTED_MODULE_2__lib_route__["a" /* default */](route, callback));
+  }
+
+  start() {
+    var _this = this;
+
+    return _asyncToGenerator(function* () {
+      if (_this.__started || _this.__starting) {
+        return;
+      }
+
+      _this.__middlewareChainRun = compose(_this.middlewares);
+
+      _this.__listenNavigation();
+
+      console.info(`Starting ${ _this.is }:${ _this.__id } ...`);
+
+      _this.__starting = true;
+      let executed = yield _this.__execute();
+      _this.__starting = false;
+
+      if (executed) {
+        console.info(`Started ${ _this.is }:${ _this.__id }`);
+
+        _this.__started = true;
+
+        _this.fire('started');
+      }
+    })();
+  }
+
+  __listenNavigation() {
+    let callback = () => {
+      this.__execute();
+    };
+
+    if (this.mode === 'history') {
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__event__["a" /* default */])(window).on('popstate', callback);
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__event__["a" /* default */])(document).on('click', evt => {
+        if (!evt.defaultPrevented && evt.target.nodeName === 'A' && evt.target.target === '') {
+          evt.preventDefault();
+
+          let state = { url: evt.target.getAttribute('href') };
+          this.history.pushState(state, evt.target.innerHTML, evt.target.href);
+
+          callback();
         }
       });
+    } else {
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__event__["a" /* default */])(window).on('hashchange', callback);
     }
-  }, {
-    key: 'listeners',
-    get: function get() {
-      return Object.assign({}, _get(IonApp.prototype.__proto__ || Object.getPrototypeOf(IonApp.prototype), 'listeners', this), {
-        'backbutton': '_backButtonTapped'
+  }
+
+  get started() {
+    return this.__started || false;
+  }
+
+  getFragmentExecutors(fragment) {
+    return this.handlers.reduce((executors, handler) => {
+      let executor = handler.getExecutorFor(fragment);
+      if (executor) executors.push(executor);
+      return executors;
+    }, []);
+  }
+
+  __execute() {
+    var _this2 = this;
+
+    return _asyncToGenerator(function* () {
+      let fragment = _this2.getFragment();
+      let context = { app: _this2, uri: fragment };
+
+      // run middleware chain then execute all executors
+      let willContinue = yield _this2.__middlewareChainRun(context, function () {
+        let executors = _this2.getFragmentExecutors(context.uri);
+        if (executors.length === 0) {
+          _this2.notFound(fragment);
+          _this2.fire('route-not-found', fragment);
+          return;
+        }
+
+        executors.forEach(function (executor) {
+          executor.handler.callback(executor.args, context);
+        });
       });
+
+      if (willContinue === false) {
+        return false;
+      }
+
+      _this2.fire('navigated', context);
+      return true;
+    })();
+  }
+
+  navigate(path, options) {
+    path = path || '/';
+    options = options || {};
+
+    if (this.mode === 'history') {
+      let url = this.rootUri + path.toString().replace(/\/$/, '').replace(/^\//, '');
+      if (this.location.href.replace(this.location.origin, '') !== url) {
+        this.history[options.replace ? 'replaceState' : 'pushState']({}, document.title, url);
+        this.__execute();
+      }
+    } else {
+      this.location.hash = this.hash + path;
     }
-  }]);
+    return this;
+  }
 
-  return IonApp;
-}(_app2.default);
+  use(middleware) {
+    this.middlewares.push(middleware);
+  }
 
-_xin2.default.define('ion-app', IonApp);
+  getFragment() {
+    try {
+      let fragment;
+      if (this.mode === 'history') {
+        fragment = decodeURI(this.location.pathname + this.location.search);
+        fragment = fragment.replace(/\?(.*)$/, '');
+        fragment = this.rootUri === '/' ? fragment : fragment.replace(this.rootUri, '');
+      } else {
+        let match = this.location.href.match(this.hashRegexp);
+        fragment = match ? match[1] : '';
+      }
 
-exports.default = IonApp;
+      return '/' + fragment.toString().replace(/\/$/, '').replace(/^\//, '');
+    } catch (err) {
+      console.error('Fragment is not match any pattern, fallback to /');
+      return '/';
+    }
+  }
+
+  // $back (evt) {
+  //   evt.preventDefault();
+  //   this.history.back();
+  // }
+}
+
+__WEBPACK_IMPORTED_MODULE_0____["a" /* default */].define('xin-app', App);
+
+function compose(middlewares) {
+  for (let fn of middlewares) {
+    if (typeof fn !== 'function') {
+      throw new TypeError('Middleware must be composed of functions!');
+    }
+  }
+
+  return (() => {
+    var _ref = _asyncToGenerator(function* (context, next) {
+      let dispatch = (() => {
+        var _ref2 = _asyncToGenerator(function* (i) {
+          if (i <= index) {
+            throw new Error('next() called multiple times');
+          }
+
+          index = i;
+          let fn = middlewares[i];
+          if (i === middlewares.length) {
+            fn = next;
+          }
+          if (!fn) {
+            return;
+          }
+
+          return yield fn(context, function () {
+            return dispatch(i + 1);
+          });
+        });
+
+        return function dispatch(_x3) {
+          return _ref2.apply(this, arguments);
+        };
+      })();
+
+      // last called middlewares #
+      let index = -1;
+
+      return dispatch(0);
+    });
+
+    return function (_x, _x2) {
+      return _ref.apply(this, arguments);
+    };
+  })();
+}
+
+/* harmony default export */ exports["a"] = App;
 
 /***/ }
 
-},[28]);
+},[34]);
 //# sourceMappingURL=ion-app.js.map

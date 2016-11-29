@@ -25,6 +25,7 @@ class IonSearchbar extends xin.Component {
     return {
       value: {
         type: String,
+        value: '',
         notify: true,
         observer: '_valueChanged',
       },

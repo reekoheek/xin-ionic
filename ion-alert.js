@@ -39,6 +39,7 @@ class IonAlert extends xin.Component {
 
       message: {
         type: String,
+        value: '',
         observer: '_messageChanged',
       },
 
@@ -152,8 +153,7 @@ class IonAlert extends xin.Component {
     alertWrapperEl.style.transform = '';
     alertWrapperEl.style.webkitTransform = '';
 
-    xin.event(this.$.backDrop).on('transitionend', () => {
-      xin.event(this.$.backDrop).off('transitionend');
+    this.once('transitionend', this.$.backDrop, () => {
       this.async(() => {
         xin('app').removeChild(this);
       });

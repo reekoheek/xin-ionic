@@ -11,6 +11,14 @@ class IonLabel extends xin.Component {
       floating: {
         type: Boolean,
       },
+
+      stacked: {
+        type: Boolean,
+      },
+
+      fixed: {
+        type: Boolean,
+      },
     };
   }
 
@@ -31,6 +39,10 @@ class IonLabel extends xin.Component {
     if (parentEl) {
       if (this.floating) {
         parentEl.classList.add(`item-label-floating`);
+      } else if (this.stacked) {
+        parentEl.classList.add(`item-label-stacked`);
+      } else if (this.fixed) {
+        parentEl.classList.add(`item-label-fixed`);
       }
     }
   }

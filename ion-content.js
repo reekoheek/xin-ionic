@@ -1,6 +1,8 @@
 import xin from 'xin';
+import { Async } from 'xin/fn';
+import event from 'xin/event';
 
-xin.event(document).on('focusing', (evt) => {
+event(document).on('focusing', (evt) => {
   let target = evt.target;
   let content = target.querySelector('ion-content');
   if (content && !content._resized) {
@@ -50,7 +52,7 @@ class IonContent extends xin.Component {
 
     if (this.scrollX || this.scrollY) {
       this.__templateModel.on('blur', evt => {
-        xin.Async.nextFrame(() => {
+        Async.nextFrame(() => {
           this.scrollTop = 0;
           this.scrollLeft = 0;
         });
@@ -74,14 +76,14 @@ class IonContent extends xin.Component {
 
     this._resized = true;
 
-    xin.Async.nextFrame(() => {
+    Async.nextFrame(() => {
       if (preCallback) preCallback();
 
-      xin.Async.nextFrame(() => {
+      Async.nextFrame(() => {
         let paddingTop = prevSiblings.reduce((paddingTop, el) => paddingTop + el.clientHeight, 0);
         let paddingBottom = nextSiblings.reduce((paddingBottom, el) => paddingBottom + el.clientHeight, 0);
 
-        xin.Async.nextFrame(() => {
+        Async.nextFrame(() => {
           this.style.paddingTop = paddingTop + 'px';
           this.style.paddingBottom = paddingBottom + 'px';
 
