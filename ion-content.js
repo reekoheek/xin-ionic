@@ -2,7 +2,9 @@ import xin from 'xin';
 import { Async } from 'xin/fn';
 import event from 'xin/event';
 
-event(document).on('focusing', (evt) => {
+import './css/ion-content.css';
+
+event(document.body).on('focusing', (evt) => {
   let target = evt.target;
   let content = target.querySelector('ion-content');
   if (content && !content._resized) {

@@ -60,7 +60,8 @@ class IonAlert extends xin.Component {
   }
 
   get template () {
-    return `
+    return '' +
+    `
       <ion-backdrop id="backDrop" (click)="_ionBackdropClicked(evt)" role="presentation"></ion-backdrop>
       <div class="alert-wrapper">
         <div class="alert-head">

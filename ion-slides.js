@@ -10,13 +10,12 @@ class IonSlides extends xin.Component {
   }
 
   get template () {
-    return `
-    <div class="swiper-container swiper-container-horizontal">
-      <div class="swiper-wrapper">
-        <slot></slot>
-      </div>
-    </div>
-    `;
+    return '' +
+      `<div class="swiper-container swiper-container-horizontal">
+        <div class="swiper-wrapper">
+          <slot></slot>
+        </div>
+      </div>`;
   }
 
   ready () {
@@ -26,6 +25,8 @@ class IonSlides extends xin.Component {
   }
 
   attached () {
+    super.attached();
+
     this.async(() => {
       System.import('swiper').then(Swiper => {
         this.swiper = new Swiper(this.$$('.swiper-container'), this.options);

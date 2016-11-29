@@ -3,7 +3,8 @@ import './css/ion-item.css';
 
 class IonItem extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <slot name="left"></slot>
       <div class="item-inner">
         <div class="input-wrapper">

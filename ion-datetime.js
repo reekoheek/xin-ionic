@@ -16,7 +16,8 @@ const NOW = new Date();
 
 class IonDateTime extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <div class="datetime-text">[[valueText]]</div>
       <button (click)="_showActionSheet" id="btn" aria-haspopup="true" class="item-cover disable-hover item-cover-default" ion-button="item-cover" type="button">
         <span class="button-inner"></span>

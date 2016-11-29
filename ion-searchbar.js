@@ -2,7 +2,8 @@ import xin from 'xin';
 
 class IonSearchbar extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <div class="searchbar-input-container">
         <div class="searchbar-search-icon"></div>
         <input class="searchbar-input" placeholder$="[[placeholder]]"

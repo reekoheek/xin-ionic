@@ -12,7 +12,8 @@ class IonCheckbox extends xin.Component {
   }
 
   get template () {
-    return `
+    return '' +
+    `
       <div id="icon" class="checkbox-icon">
         <div class="checkbox-inner"></div>
       </div>

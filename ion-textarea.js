@@ -3,7 +3,8 @@ import xin from 'xin';
 
 class IonTextArea extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <textarea id="input" class="text-input" autocomplete="off" autocorrect="off"
         placeholder="" (focus)="_gotFocus(evt)" (blur)="_lostFocus(evt)">{{value}}</textarea>
     `;

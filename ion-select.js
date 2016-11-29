@@ -11,7 +11,8 @@ function clone (orig) {
 
 class IonSelect extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <div class="select-text">[[_computeText(value)]]</div>
       <div class="select-icon">
         <div class="select-icon-inner"></div>
