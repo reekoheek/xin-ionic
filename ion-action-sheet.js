@@ -23,7 +23,8 @@ class IonActionSheet extends xin.Component {
   }
 
   get template () {
-    return `
+    return '' +
+    `
       <ion-backdrop (click)="_ionBackdropClicked(evt)" role="presentation" style="opacity: 0.4;"></ion-backdrop>
       <div class="action-sheet-wrapper" style="transform: translateY(0%);">
         <div class="action-sheet-container">

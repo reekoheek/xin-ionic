@@ -14,7 +14,8 @@ class IonMenu extends xin.Component {
   }
 
   get template () {
-    return `
+    return '' +
+    `
       <div class="menu-inner"><slot></slot></div>
       <ion-backdrop (click)="close" role="presentation" class="show-backdrop"></ion-backdrop>
     `;

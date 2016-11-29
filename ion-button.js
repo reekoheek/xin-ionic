@@ -3,7 +3,8 @@ import xin from 'xin';
 
 class IonButton extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <span class="button-inner"><slot>Button</slot></span>
       <div class="button-effect"></div>
     `;

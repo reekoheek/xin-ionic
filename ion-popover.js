@@ -63,7 +63,8 @@ class IonPopover extends xin.Component {
   // <ion-item class="item item-block item-ios><ion-label class="label-ios">Detail</ion-label></ion-item>
   // </ion-list>
   get template () {
-    return `
+    return '' +
+    `
     <ion-backdrop (click)="_ionBackdropClicked()" id="backDrop" disable-activated="" role="presentation" tappable=""></ion-backdrop>
     <div class="popover-wrapper" >
       <div class="popover-arrow"></div>

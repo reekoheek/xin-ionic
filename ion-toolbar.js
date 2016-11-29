@@ -2,7 +2,8 @@ import xin from 'xin';
 
 class IonToolbar extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <div class="toolbar-background toolbar-background-md"></div>
       <slot name="left"></slot>
       <slot name="title"></slot>

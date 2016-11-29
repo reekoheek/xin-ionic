@@ -2,7 +2,8 @@ import xin from 'xin';
 
 class IonListHeader extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <slot name="left"></slot>
       <div class="item-inner">
         <div class="input-wrapper">

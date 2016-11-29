@@ -5,7 +5,8 @@ let element;
 
 class IonPickerCol extends xin.Component {
   get template () {
-    return `
+    return '' +
+    `
       <div class="picker-opts" (touchstart)="_touchStarted(evt)" (touchmove)="_touchMoved(evt)" (touchend)="_touchEnd(evt)">
         <template id="repeater" is="xin-repeat" items="[[col.options]]" as="option">
           <button is="ion-button" picker-opt
@@ -112,7 +113,8 @@ class IonPicker extends xin.Component {
   }
 
   get template () {
-    return `
+    return '' +
+    `
       <ion-backdrop id="backDrop" (click)="_cancelClicked(evt)" disable-activated="" role="presentation" tappable></ion-backdrop>
       <div class="picker-wrapper">
         <div class="picker-toolbar">
