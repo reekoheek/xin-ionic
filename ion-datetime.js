@@ -1,5 +1,5 @@
 import xin from 'xin';
-import object from 'xin/object';
+import { val } from 'xin/object';
 import IonPicker from './ion-picker';
 
 import moment from 'moment';
@@ -157,7 +157,7 @@ class IonDateTime extends xin.Component {
       }
 
       let nowToken = now.format(token);
-      let options = object.val(column.options);
+      let options = val(column.options);
       let selected = options.find(c => {
         return c.label === nowToken;
       });
