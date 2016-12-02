@@ -19,7 +19,7 @@ class IonToolbar extends xin.Component {
 
     // XXX this is quick fix to non-component style
     this.parentElement.classList.add(`header-${mode}`);
-    let titleEl = this.querySelector('ion-title');
+    let titleEl = this.$$('ion-title');
     if (titleEl) {
       titleEl.classList.add(`toolbar-title`);
       titleEl.classList.add(`toolbar-title-${mode}`);
