@@ -134,16 +134,20 @@ class IonAlert extends xin.Component {
   present () {
     xin('app').appendChild(this);
 
-    this.async(() => {
-      let mode = xin('app').platformMode || 'md';
-      this.classList.add(`alert-${mode}`);
+    return new Promise(resolve => {
+      this.async(() => {
+        let mode = xin('app').platformMode || 'md';
+        this.classList.add(`alert-${mode}`);
 
-      let alertWrapperEl = this.$$('.alert-wrapper');
-      this.$.backDrop.style.opacity = 0.6;
-      alertWrapperEl.style.opacity = 1;
-      alertWrapperEl.style.transform = 'scale(1)';
-      alertWrapperEl.style.webkitTransform = 'scale(1)';
-    }, 100);
+        let alertWrapperEl = this.$$('.alert-wrapper');
+        this.$.backDrop.style.opacity = 0.6;
+        alertWrapperEl.style.opacity = 1;
+        alertWrapperEl.style.transform = 'scale(1)';
+        alertWrapperEl.style.webkitTransform = 'scale(1)';
+
+        resolve();
+      }, 100);
+    });
   }
 
   dismiss () {
@@ -154,9 +158,13 @@ class IonAlert extends xin.Component {
     alertWrapperEl.style.transform = '';
     alertWrapperEl.style.webkitTransform = '';
 
-    this.once('transitionend', this.$.backDrop, () => {
-      this.async(() => {
-        xin('app').removeChild(this);
+    return new Promise(resolve => {
+      this.once('transitionend', this.$.backDrop, () => {
+        this.async(() => {
+          xin('app').removeChild(this);
+
+          resolve();
+        });
       });
     });
   }
