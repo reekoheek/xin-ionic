@@ -73,6 +73,10 @@ class IonInput extends xin.Component {
     this.itemElement.classList.remove('input-has-focus');
     this.fire('blur');
   }
+
+  blur () {
+    this.$.input.blur();
+  }
 }
 
 xin.define('ion-input', IonInput);
