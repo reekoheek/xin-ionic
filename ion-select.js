@@ -26,6 +26,10 @@ class IonSelect extends xin.Component {
 
   get props () {
     return {
+      label: {
+        type: String,
+      },
+
       multiple: {
         type: Boolean,
       },
@@ -66,8 +70,7 @@ class IonSelect extends xin.Component {
       this.set('inputs', this.childrenInputs);
     }
 
-    let labelEl = this.parentElement.querySelector('ion-label');
-    this.label = labelEl ? labelEl.textContent : 'Select';
+    this.labelElement = this.parentElement.querySelector('ion-label');
   }
 
   attached () {
@@ -116,9 +119,11 @@ class IonSelect extends xin.Component {
       return input;
     });
 
+    let label = this.label || (this.labelElement ? this.labelElement.textContent : 'Select');
+
     const IonAlert = (await System.import('./ion-alert')).default;
     let alert = IonAlert.create({
-      title: this.label,
+      title: label,
       inputs: inputs,
       buttons: [
         {
