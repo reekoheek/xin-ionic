@@ -17,7 +17,7 @@ class IonLoading extends xin.Component {
 
   get template () {
     return String(`
-      <ion-backdrop id="backDrop" disable-activated="" role="presentation" tappable="" style.opacity="[[_computeOpacity(showBackdrop)]]"></ion-backdrop>
+      <ion-backdrop id="backDrop" disable-activated="" role="presentation" tappable=""></ion-backdrop>
       <div class="loading-wrapper">
       <div class="loading-spinner">
         <ion-spinner class="spinner-ios spinner-bubbles">
@@ -90,7 +90,9 @@ class IonLoading extends xin.Component {
         this.classList.add(`loading-${mode}`);
 
         let loadingWrapperEl = this.$$('.loading-wrapper');
-        this.$.backDrop.style.opacity = 0.6;
+        if (this.showBackdrop) {
+          this.$.backDrop.style.opacity = 0.6;
+        }
         loadingWrapperEl.style.opacity = 1;
         loadingWrapperEl.style.transform = 'scale(1)';
         loadingWrapperEl.style.webkitTransform = 'scale(1)';
@@ -109,6 +111,10 @@ class IonLoading extends xin.Component {
     loadingWrapperEl.style.webkitTransform = '';
 
     return new Promise(resolve => {
+      if (!this.showBackdrop) {
+        return resolve();
+      }
+
       this.once('transitionend', this.$.backDrop, () => {
         this.async(() => {
           xin('app').removeChild(this);
@@ -119,7 +125,7 @@ class IonLoading extends xin.Component {
   }
 
   _computeOpacity (showBackdrop) {
-    return showBackdrop ? '0.3' : '0';
+    return showBackdrop ? '0.6' : '0';
   }
 }
 
