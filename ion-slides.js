@@ -10,12 +10,13 @@ class IonSlides extends xin.Component {
   }
 
   get template () {
-    return '' +
-      `<div class="swiper-container swiper-container-horizontal">
+    return String(`
+      <div class="swiper-container swiper-container-horizontal">
         <div class="swiper-wrapper">
           <slot></slot>
         </div>
-      </div>`;
+      </div>
+    `);
   }
 
   ready () {
