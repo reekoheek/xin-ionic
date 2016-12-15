@@ -85,6 +85,7 @@ class IonLoading extends xin.Component {
     xin('app').appendChild(this);
 
     return new Promise(resolve => {
+      // wait 100ms to make sure already ready
       this.async(() => {
         let mode = xin('app').platformMode || 'md';
         this.classList.add(`loading-${mode}`);
@@ -98,35 +99,40 @@ class IonLoading extends xin.Component {
           return resolve();
         }
 
-        this.$.backDrop.style.opacity = 0.6;
         this.once('transitionend', this.$.backDrop, () => {
           this.async(() => {
             resolve();
           });
         });
+        this.$.backDrop.style.opacity = 0.6;
       }, 100);
     });
   }
 
   dismiss () {
-    let loadingWrapperEl = this.$$('.loading-wrapper');
-
-    this.$.backDrop.style.opacity = '';
-    loadingWrapperEl.style.opacity = '';
-    loadingWrapperEl.style.transform = '';
-    loadingWrapperEl.style.webkitTransform = '';
-
     return new Promise(resolve => {
+      let loadingWrapperEl = this.$$('.loading-wrapper');
+
+      loadingWrapperEl.style.opacity = '';
+      loadingWrapperEl.style.transform = '';
+      loadingWrapperEl.style.webkitTransform = '';
+
+      let resolving = () => {
+        xin('app').removeChild(this);
+        resolve();
+      };
+
       if (!this.showBackdrop) {
-        return resolve();
+        return resolving();
       }
 
       this.once('transitionend', this.$.backDrop, () => {
         this.async(() => {
-          xin('app').removeChild(this);
-          resolve();
+          resolving();
         });
       });
+
+      this.$.backDrop.style.opacity = '';
     });
   }
 
