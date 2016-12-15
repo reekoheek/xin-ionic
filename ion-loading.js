@@ -90,14 +90,20 @@ class IonLoading extends xin.Component {
         this.classList.add(`loading-${mode}`);
 
         let loadingWrapperEl = this.$$('.loading-wrapper');
-        if (this.showBackdrop) {
-          this.$.backDrop.style.opacity = 0.6;
-        }
         loadingWrapperEl.style.opacity = 1;
         loadingWrapperEl.style.transform = 'scale(1)';
         loadingWrapperEl.style.webkitTransform = 'scale(1)';
 
-        resolve();
+        if (!this.showBackdrop) {
+          return resolve();
+        }
+
+        this.$.backDrop.style.opacity = 0.6;
+        this.once('transitionend', this.$.backDrop, () => {
+          this.async(() => {
+            resolve();
+          });
+        });
       }, 100);
     });
   }
