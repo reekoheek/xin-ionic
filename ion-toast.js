@@ -57,15 +57,13 @@ class IonToast {
       }, 50);
     });
 
-    await new Promise(async resolve => {
-      this.dismissCallback = resolve;
-
-      if (this.duration !== -1) {
+    if (this.duration !== -1) {
+      await new Promise(resolve => {
+        this.dismissCallback = resolve;
         Async.run(resolve, this.duration);
-      }
-    });
-
-    await this._dismiss();
+      });
+      await this._dismiss();
+    }
   }
 
   async _dismiss () {
