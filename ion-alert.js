@@ -1,4 +1,5 @@
 import xin from 'xin';
+import html from './ion-alert.html';
 
 import 'xin/components/repeat';
 
@@ -60,58 +61,7 @@ class IonAlert extends xin.Component {
   }
 
   get template () {
-    return '' +
-    `
-      <ion-backdrop id="backDrop" (click)="_ionBackdropClicked(evt)" role="presentation"></ion-backdrop>
-      <div class="alert-wrapper">
-        <div class="alert-head">
-          <h2 class="alert-title">[[title]]</h2>
-          <h3 class="alert-sub-title">[[subtitle]]</h3>
-        </div>
-        <div class="alert-message">[[message]]</div>
-        <div>
-          <div class="alert-input-group">
-            <template is="xin-repeat" items="[[inputs]]">
-              <div class="alert-input-wrapper"><input class="alert-input" placeholder="[[item.placeholder]]" type="[[_computeType(item.type)]]" name="[[item.name]]"></div>
-            </template>
-          </div>
-          <div class="alert-checkbox-group">
-            <template is="xin-repeat" items="[[inputs]]" id="checkboxRepeat">
-              <button class="alert-tappable alert-checkbox disable-hover alert-checkbox-button alert-checkbox-button-md alert-checkbox-button-default alert-checkbox-button-default-md" ion-button="alert-checkbox-button" role="checkbox" aria-checked$="[[item.checked]]">
-                <span class="button-inner">
-                  <div class="alert-checkbox-icon">
-                    <div class="alert-checkbox-inner"></div>
-                  </div>
-                  <div class="alert-checkbox-label">[[item.label]]</div>
-                </span>
-                <div class="button-effect" style="transform: translate3d(-7px, -104px, 0px) scale(1); height: 240px; width: 240px; opacity: 0; transition: transform 383ms, opacity 268ms 115ms;"></div>
-              </button>
-            </template>
-          </div>
-          <div class="alert-radio-group">
-            <template is="xin-repeat" items="[[inputs]]" id="radioRepeat">
-              <button class="alert-tappable alert-radio disable-hover alert-radio-button alert-radio-button-md alert-radio-button-default alert-radio-button-default-md" ion-button="alert-radio-button" role="radio" aria-checked$="[[item.checked]]">
-                <span class="button-inner">
-                  <div class="alert-radio-icon">
-                    <div class="alert-radio-inner"></div>
-                  </div>
-                  <div class="alert-radio-label">[[item.label]]</div>
-                </span>
-                <div class="button-effect"></div>
-              </button>
-            </template>
-          </div>
-        </div>
-        <div class="alert-button-group">
-          <template is="xin-repeat" items="[[buttons]]" id="buttonRepeat">
-            <button ion-button="alert-button" class="disable-hover alert-button alert-button-md alert-button-default alert-button-default-md">
-              <span class="button-inner">[[item.text]]</span>
-              <div class="button-effect"></div>
-            </button>
-          </template>
-        </div>
-      </div>
-    `;
+    return html;
   }
 
   get listeners () {

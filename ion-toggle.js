@@ -2,7 +2,7 @@ import xin from 'xin';
 
 class IonToggle extends xin.Component {
   get template () {
-    return '' + `
+    return String(`
       <div class="toggle-icon" class.toggle-checked="[[checked]]">
         <div class="toggle-inner"></div>
       </div>
@@ -17,7 +17,7 @@ class IonToggle extends xin.Component {
         <span class="button-inner"></span>
         <div class="button-effect"></div>
       </button>
-    `;
+    `);
   }
 
   get props () {

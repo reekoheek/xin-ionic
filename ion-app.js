@@ -48,7 +48,7 @@ class IonApp extends App {
       return;
     }
 
-    this._menu$.open();
+    await this._menu$.open();
   }
 
   async closeMenu () {
@@ -56,7 +56,7 @@ class IonApp extends App {
       return;
     }
 
-    this._menu$.close();
+    await this._menu$.close();
   }
 
   _computePlatformMode (platform) {
