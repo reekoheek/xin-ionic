@@ -20,7 +20,7 @@ class IonLoading extends xin.Component {
       <ion-backdrop id="backDrop" disable-activated="" role="presentation" tappable=""></ion-backdrop>
       <div class="loading-wrapper">
       <div class="loading-spinner">
-        <ion-spinner class="spinner-ios spinner-bubbles">
+        <ion-spinner class="spinner-md spinner-bubbles">
           <svg viewBox="0 0 64 64" style="top: 0px; left: 9px; animation-delay: -1000ms; animation-duration: 1000ms;">
             <circle transform="translate(32,32)" r="5"></circle>
           </svg>

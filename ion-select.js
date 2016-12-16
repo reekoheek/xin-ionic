@@ -121,7 +121,9 @@ class IonSelect extends xin.Component {
 
     let label = this.label || (this.labelElement ? this.labelElement.textContent : 'Select');
 
-    const IonAlert = (await System.import('./ion-alert')).default;
+    const alertModule = await System.import('./ion-alert');
+    const IonAlert = alertModule.default;
+
     let alert = IonAlert.create({
       title: label,
       inputs: inputs,

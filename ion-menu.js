@@ -49,7 +49,7 @@ class IonMenu extends xin.Component {
         this.async(() => {
           this.classList.remove('show-menu');
           resolve();
-        }, 1);
+        }, 250);
       });
 
       this.$$('.menu-inner').style.transform = '';

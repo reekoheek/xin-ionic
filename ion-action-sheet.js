@@ -23,21 +23,20 @@ class IonActionSheet extends xin.Component {
   }
 
   get template () {
-    return '' +
-    `
+    return String(`
       <ion-backdrop (click)="_ionBackdropClicked(evt)" role="presentation" style="opacity: 0.4;"></ion-backdrop>
       <div class="action-sheet-wrapper" style="transform: translateY(0%);">
         <div class="action-sheet-container">
           <div class="action-sheet-group">
             <div class="action-sheet-title" id="acst-hdr-1">Albums</div>
-            <button class="disable-hover action-sheet-button action-sheet-button-ios action-sheet-destructive action-sheet-button-default action-sheet-button-default-ios" ion-button="action-sheet-button">
+            <button class="disable-hover action-sheet-button action-sheet-button-md action-sheet-destructive action-sheet-button-default action-sheet-button-default-md" ion-button="action-sheet-button">
               <span class="button-inner">Delete</span>
               <div class="button-effect"></div>
             </button>
           </div>
         </div>
       </div>
-    `;
+    `);
   }
 
   created () {
