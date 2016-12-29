@@ -133,7 +133,7 @@ class IonDateTime extends xin.Component {
           break;
         case 'DD':
           let results = [];
-          for (let i = 1; i < 31; i++) {
+          for (let i = 1; i <= 31; i++) {
             let label = i < 10 ? `0${i}` : `${i}`;
             results.push({
               label: label,
