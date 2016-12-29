@@ -14,11 +14,10 @@ class IonMenu extends xin.Component {
   }
 
   get template () {
-    return '' +
-    `
+    return String(`
       <div class="menu-inner"><slot></slot></div>
       <ion-backdrop (click)="close" role="presentation" class="show-backdrop"></ion-backdrop>
-    `;
+    `);
   }
 
   attached () {
@@ -32,7 +31,8 @@ class IonMenu extends xin.Component {
     this.isOpened = true;
     this.classList.add('show-menu');
     this.async(() => {
-      this.$$('.menu-inner').style.transform = 'translateX(0)';
+      let menuInner = this.$$('.menu-inner');
+      menuInner.style.webkitTransform = menuInner.style.transform = 'translateX(0)';
       this.$$('ion-backdrop').style.opacity = '0.6';
     }, 1);
   }
@@ -52,7 +52,8 @@ class IonMenu extends xin.Component {
         }, 250);
       });
 
-      this.$$('.menu-inner').style.transform = '';
+      let menuInner = this.$$('.menu-inner');
+      menuInner.style.webkitTransform = menuInner.style.transform = '';
       this.$$('ion-backdrop').style.opacity = '0.0';
     });
   }

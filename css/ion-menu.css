@@ -4,6 +4,7 @@ ion-menu ion-backdrop {
 }
 
 ion-menu .menu-inner {
+  -webkit-transition: -webkit-transform .3s;
   transition: transform .3s;
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
