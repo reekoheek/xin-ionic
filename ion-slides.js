@@ -6,6 +6,10 @@ class IonSlides extends xin.Component {
       options: {
         type: Object,
       },
+
+      showDefaultPagination: {
+        type: Boolean,
+      },
     });
   }
 
@@ -15,6 +19,7 @@ class IonSlides extends xin.Component {
         <div class="swiper-wrapper">
           <slot></slot>
         </div>
+        <div class="swiper-pagination"></div>
       </div>
     `);
   }
@@ -22,8 +27,14 @@ class IonSlides extends xin.Component {
   attached () {
     super.attached();
 
+    const options = this.options;
+
+    if (this.showDefaultPagination) {
+      options.pagination = '.swiper-pagination';
+    }
+
     System.import('swiper').then(Swiper => {
-      this.swiper = new Swiper(this.$$('.swiper-container'), this.options);
+      this.swiper = new Swiper(this.$$('.swiper-container'), options);
     });
   }
 }
