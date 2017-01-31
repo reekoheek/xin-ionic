@@ -30,6 +30,11 @@ class IonSelect extends xin.Component {
         type: String,
       },
 
+      placeholder: {
+        type: String,
+        value: '',
+      },
+
       multiple: {
         type: Boolean,
       },
@@ -96,12 +101,12 @@ class IonSelect extends xin.Component {
     if (Array.isArray(value)) {
       return value.map(value => {
         let input = this.inputs.find(inp => inp.value === value);
-        return input ? input.label : '';
+        return input ? input.label : this.placeholder;
       }).join(', ');
     }
 
     let input = this.inputs.find(inp => inp.value === value);
-    return input ? input.label : '';
+    return input ? input.label : this.placeholder;
   }
 
   async _selectClicked (evt) {

@@ -62,10 +62,13 @@ class IonPopover extends xin.Component {
     popoverWrapperEl.style.transform = '';
     popoverWrapperEl.style.webkitTransform = '';
 
-    xin.event(this.$.backDrop).on('transitionend', () => {
-      xin.event(this.$.backDrop).off('transitionend');
-      this.async(() => {
-        xin('app').removeChild(this);
+    return new Promise(resolve => {
+      this.once('transitionend', this.$.backDrop, () => {
+        this.async(() => {
+          xin('app').removeChild(this);
+
+          resolve();
+        });
       });
     });
   }
