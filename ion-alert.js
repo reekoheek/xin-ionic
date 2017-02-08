@@ -17,6 +17,7 @@ class IonAlert extends xin.Component {
       title: '',
       subtitle: '',
       message: '',
+      content: '',
       inputs: [],
       enableBackdropDismiss: true,
       buttons: [],
@@ -42,6 +43,12 @@ class IonAlert extends xin.Component {
         type: String,
         value: '',
         observer: '_messageChanged',
+      },
+
+      content: {
+        type: String,
+        value: '',
+        observer: '_contentChanged',
       },
 
       inputs: {
@@ -155,6 +162,21 @@ class IonAlert extends xin.Component {
       }
       if (message) {
         placeholderEl.style.display = '';
+      } else {
+        placeholderEl.style.display = 'none';
+      }
+    });
+  }
+
+  _contentChanged (content) {
+    this.async(() => {
+      let placeholderEl = this.$$('.alert-message');
+      if (!placeholderEl) {
+        return;
+      }
+      if (content) {
+        placeholderEl.style.display = '';
+        placeholderEl.innerHTML = content;
       } else {
         placeholderEl.style.display = 'none';
       }
