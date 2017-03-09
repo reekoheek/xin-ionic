@@ -11,17 +11,16 @@ function clone (orig) {
 
 class IonSelect extends xin.Component {
   get template () {
-    return '' +
-    `
+    return (`
       <div class="select-text">[[_computeText(value)]]</div>
       <div class="select-icon">
-        <div class="select-icon-inner"></div>
+      <div class="select-icon-inner"></div>
       </div>
       <button aria-haspopup="true" (click)="_selectClicked(evt)" class="item-cover disable-hover item-cover-md item-cover-default item-cover-default-md" ion-button="item-cover">
-        <span class="button-inner"></span>
-        <div class="button-effect" style="transform: translate3d(197px, -75px, 0px) scale(1); height: 240px; width: 240px; opacity: 0; transition: transform 420ms, opacity 294ms 126ms;"></div>
+      <span class="button-inner"></span>
+      <div class="button-effect" style="transform: translate3d(197px, -75px, 0px) scale(1); height: 240px; width: 240px; opacity: 0; transition: transform 420ms, opacity 294ms 126ms;"></div>
       </button>
-    `;
+    `);
   }
 
   get props () {
@@ -41,7 +40,7 @@ class IonSelect extends xin.Component {
 
       value: {
         type: Object,
-        value: () => ({}),
+        value: '',
         notify: true,
       },
 
