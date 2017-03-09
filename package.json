@@ -40,6 +40,6 @@
   "dependencies": {
     "moment": "^2.15.1",
     "swiper": "^3.4.0",
-    "xin": "xinix-technology/xin#next"
+    "xin": "xinix-technology/xin#2.3.1"
   }
 }
