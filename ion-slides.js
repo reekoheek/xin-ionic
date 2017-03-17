@@ -5,6 +5,7 @@ class IonSlides extends xin.Component {
     return Object.assign({}, super.props, {
       options: {
         type: Object,
+        value: () => ({}),
       },
 
       showDefaultPagination: {
@@ -33,18 +34,21 @@ class IonSlides extends xin.Component {
   attached () {
     super.attached();
 
-    const options = this.options;
-
-    if (this.showDefaultPagination) {
-      options.pagination = '.swiper-pagination';
-    }
-    if (this.showNavigationButton) {
-      options.nextButton = '.swiper-button-next';
-      options.prevButton = '.swiper-button-prev';
-    }
-
     System.import('swiper').then(Swiper => {
-      this.swiper = new Swiper(this.$$('.swiper-container'), options);
+      const { options } = this;
+
+      if (this.showDefaultPagination) {
+        options.pagination = '.swiper-pagination';
+      }
+      
+      if (this.showNavigationButton) {
+        options.nextButton = '.swiper-button-next';
+        options.prevButton = '.swiper-button-prev';
+      }
+
+      this.async(() => {
+        this.swiper = new Swiper(this.$$('.swiper-container'), options);
+      }, 300);
     });
   }
 }
