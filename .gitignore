@@ -2,3 +2,4 @@
 # dev files
 /node_modules
 /old
+yarn.lock
