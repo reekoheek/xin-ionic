@@ -38,7 +38,6 @@ class IonSlides extends xin.Component {
     if (this.showDefaultPagination) {
       options.pagination = '.swiper-pagination';
     }
-    console.log(options);
     if (this.showNavigationButton) {
       options.nextButton = '.swiper-button-next';
       options.prevButton = '.swiper-button-prev';
