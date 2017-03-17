@@ -11,6 +11,10 @@ class IonSlides extends xin.Component {
       showDefaultPagination: {
         type: Boolean,
       },
+
+      showNavigationButton: {
+        type: Boolean,
+      },
     });
   }
 
@@ -21,6 +25,8 @@ class IonSlides extends xin.Component {
           <slot></slot>
         </div>
         <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"><ion-icon name="arrow-back-outline" role="img" class="icon-ios ion-ios-arrow-back-outline item-icon" aria-label="arrow-back-outline"></ion-icon></div>
+        <div class="swiper-button-next"><ion-icon name="arrow-forward-outline" role="img" class="icon-ios ion-ios-arrow-forward-outline item-icon" aria-label="arrow-forward-outline"></ion-icon></div>
       </div>
     `);
   }
@@ -33,6 +39,11 @@ class IonSlides extends xin.Component {
 
       if (this.showDefaultPagination) {
         options.pagination = '.swiper-pagination';
+      }
+      
+      if (this.showNavigationButton) {
+        options.nextButton = '.swiper-button-next';
+        options.prevButton = '.swiper-button-prev';
       }
 
       this.async(() => {
