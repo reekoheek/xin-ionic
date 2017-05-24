@@ -93,6 +93,11 @@ class IonAlert extends xin.Component {
 
     return new Promise(resolve => {
       this.async(() => {
+        this.onBackButton = async (e) => {
+          await this.dismiss();
+        };
+        document.addEventListener('backbutton', this.onBackButton, false);
+
         let mode = xin('app').platformMode || 'md';
         this.classList.add(`alert-${mode}`);
 
@@ -108,6 +113,8 @@ class IonAlert extends xin.Component {
   }
 
   dismiss () {
+    document.removeEventListener('backbutton', this.onBackButton, false);
+
     let alertWrapperEl = this.$$('.alert-wrapper');
 
     this.$.backDrop.style.opacity = '';
@@ -291,6 +298,7 @@ class IonAlert extends xin.Component {
       this.dismiss();
     }
   }
+
 }
 
 xin.define('ion-alert', IonAlert);
