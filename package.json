@@ -1,0 +1,45 @@
+{
+  "name": "xin-ionic",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:webpack": "webpack",
+    "build:profile": "mkdir -p profiles && webpack --profile --json > profiles/profile-`date +'%Y%m%d%H%M%S'`.json",
+    "build": "yarn run clean && yarn run build:webpack && NODE_ENV=production yarn run build:webpack",
+    "test:lint": "eslint .",
+    "test": "yarn run test:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reekoheek/xin-ionic.git"
+  },
+  "author": "Ganesha <reekoheek@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reekoheek/xin-ionic/issues"
+  },
+  "homepage": "https://github.com/reekoheek/xin-ionic#readme",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-3": "^6.16.0",
+    "css-loader": "^0.25.0",
+    "eslint": "^3.9.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "style-loader": "^0.13.1",
+    "uglify-js-harmony": "mishoo/UglifyJS2#harmony",
+    "webpack": "2.1.0-beta.27"
+  },
+  "dependencies": {
+    "moment": "^2.15.1",
+    "swiper": "^3.4.0",
+    "xin": "xinix-technology/xin#2.3.1"
+  }
+}

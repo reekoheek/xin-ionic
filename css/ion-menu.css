@@ -1,0 +1,12 @@
+ion-menu ion-backdrop {
+  transition: opacity .3s;
+  will-change: opacity;
+}
+
+ion-menu .menu-inner {
+  -webkit-transition: -webkit-transform .3s;
+  transition: transform .3s;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  will-change: transform, -webkit-transform;
+}
