@@ -5,18 +5,17 @@ let element;
 
 class IonPickerCol extends xin.Component {
   get template () {
-    return '' +
-    `
-      <div class="picker-opts" (touchstart)="_touchStarted(evt)" (touchmove)="_touchMoved(evt)" (touchend)="_touchEnd(evt)">
+    return (`
+      <div id="optGroup" class="picker-opts" (touchstart)="_touchStarted(evt)" (touchmove)="_touchMoved(evt)" (touchend)="_touchEnd(evt)">
         <template id="repeater" is="xin-repeat" items="[[col.options]]" as="option">
           <button is="ion-button" picker-opt
             (click)="_optionClicked(evt)"
             class="disable-hover"
             class.picker-opt-selected="[[option.selected]]"
-            style.transform="[[option._trans]]">[[option.label]]</button>
+            style.transform="[[option._trans]]" style.-webkit-transform="[[option._trans]]">[[option.label]]</button>
         </template>
       </div>
-    `;
+    `);
   }
 
   get props () {
@@ -43,29 +42,37 @@ class IonPickerCol extends xin.Component {
   }
 
   _touchStarted (evt) {
+    evt.preventDefault();
     evt.stopImmediatePropagation();
+
     this.startY = evt.touches[0].pageY;
   }
 
   _touchMoved (evt) {
+    evt.preventDefault();
     evt.stopImmediatePropagation();
-    // this.debounce('_touchMoved', () => {
-    let y = evt.touches[0].pageY;
-    let deltaY = this.startY - y;
-    this.update(this.y - deltaY);
-    // });
+
+    this.debounce('_touchMoved', () => {
+      let y = evt.touches[0].pageY;
+      let deltaY = this.startY - y;
+      this.update(this.y - deltaY);
+    });
   }
 
   _touchEnd (evt) {
+    evt.preventDefault();
     evt.stopImmediatePropagation();
-    let option = this.col.options.find(option => option.selected);
-    let index = this.col.options.indexOf(option);
-    if (index === -1) {
-      index = this.col.options[0]._y > 0 ? 0 : this.col.options.length - 1;
-    }
-    // force notify selected index
-    this['selectedIndex'] = index;
-    this.notify('selectedIndex', index);
+
+    this.async(() => {
+      let option = this.col.options.find(option => option.selected);
+      let index = this.col.options.indexOf(option);
+      if (index === -1) {
+        index = this.col.options[0]._y > 0 ? 0 : this.col.options.length - 1;
+      }
+      // force notify selected index
+      this['selectedIndex'] = index;
+      this.notify('selectedIndex', index);
+    });
   }
 
   _colChanged (col) {
@@ -82,10 +89,14 @@ class IonPickerCol extends xin.Component {
   }
 
   update (y) {
+    if (!this.col || !this.col.options) {
+      return;
+    }
+
     this.debounce('_update', () => {
-      if (this.col && this.col.options) {
-        this.async(() => {
-          this.col.options.forEach((option, i) => {
+      this.async(() => {
+        try {
+          this.col.options.map((option, i) => {
             let posY = y + (i * 41);
             option.selected = posY >= -20 && posY <= 20;
             option._y = posY;
@@ -93,8 +104,19 @@ class IonPickerCol extends xin.Component {
           });
 
           this.$.repeater.notify('items');
-        });
-      }
+
+          if (this.col._ready) {
+            return;
+          }
+
+          this.async(() => {
+            this.fire('ion-picker-col-ready');
+            this.col._ready = true;
+          });
+        } catch (err) {
+          console.error('err', err.stack);
+        }
+      });
     });
   }
 }
@@ -113,8 +135,7 @@ class IonPicker extends xin.Component {
   }
 
   get template () {
-    return '' +
-    `
+    return (`
       <ion-backdrop id="backDrop" (click)="_cancelClicked(evt)" disable-activated="" role="presentation" tappable></ion-backdrop>
       <div class="picker-wrapper">
         <div class="picker-toolbar">
@@ -133,7 +154,7 @@ class IonPicker extends xin.Component {
           <div class="picker-below-highlight"></div>
         </div>
       </div>
-    `;
+    `);
   }
 
   get props () {
@@ -160,18 +181,41 @@ class IonPicker extends xin.Component {
     this.classList.add(`picker-${mode}`);
   }
 
-  present () {
+  async _componentReady () {
+    let childCount = this.columns.length;
+    await new Promise(resolve => {
+      let readyCount = 0;
+      this.on('ion-picker-col-ready', () => {
+        readyCount++;
+        if (readyCount >= childCount) {
+          this.off('ion-picker-col-ready');
+          resolve();
+        }
+      });
+    });
+  }
+
+  async present () {
     xin('app').appendChild(this);
 
+    await this._componentReady();
+
     this.async(() => {
+      this.onBackButton = async (e) => {
+        await this.dismiss();
+      };
+      document.addEventListener('backbutton', this.onBackButton, false);
+
       let pickerWrapperEl = this.$$('.picker-wrapper');
       this.$.backDrop.style.opacity = 0.6;
       pickerWrapperEl.style.transform = 'translate3d(0, 0, 0)';
       pickerWrapperEl.style.webkitTransform = 'translate3d(0, 0, 0)';
-    }, 1);
+    });
   }
 
   dismiss () {
+    document.removeEventListener('backbutton', this.onBackButton, false);
+
     let pickerWrapperEl = this.$$('.picker-wrapper');
 
     this.$.backDrop.style.opacity = '';
